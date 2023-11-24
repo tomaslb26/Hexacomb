@@ -1,0 +1,86 @@
+.sign-main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.sign-supporting{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.sign-supporting>h1{
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+    font-family: "Inter-Variable";
+}
+
+.sign-supporting>span{
+    font-size: 16px;
+    font-weight: 400;
+    color: #f0ad2c;
+    font-family: "Inter-Variable";
+}
+
+.input-row{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-row>h5{
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    font-family: "Inter-Variable";
+}
+
+.input-row>input{
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #f0ad2c;
+    background: #2D2937;
+    padding: 0px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    font-family: "Inter-Variable";
+}
+
+.sign-main>p{
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(255, 0, 0);
+    font-family: "Inter-Variable";
+}
+
+.login{
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.login>a>button{
+    color: var(--success-500);
+    font-size: 18px;
+    font-weight: 700;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.login>a>button:hover{
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}

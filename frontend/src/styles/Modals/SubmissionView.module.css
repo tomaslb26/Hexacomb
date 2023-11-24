@@ -1,0 +1,107 @@
+.submission-view{
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    border: 1px solid #f0ad2c;
+    background: linear-gradient(to bottom right, #2D2937, #1A1625);
+    border-radius: 12px;
+    padding: 32px;
+    position: relative;
+    animation: fadeIn 0.5s ease-in-out;
+    overflow: auto;
+    max-height: 90%;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.header>h1{
+    font-size: 36px;
+    font-weight: 600;
+    font-family: "SpaceGrotesk-Variable";
+    color: white;
+    margin: 0px;
+}
+
+.header>h2{
+    font-size: 24px;
+    font-weight: 400;
+    color: white;
+    margin: 0px;
+}
+
+.submission-view>p{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter-Variable";
+    color: rgb(255, 255, 247);
+}
+
+.items{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 16px;
+}
+
+.item{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.item>img{
+    width: 24px;
+    height: 24px;
+    white-space: nowrap;
+}
+
+.item>p{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter-Variable";
+    color: rgb(255, 255, 247);
+}
+
+.name{
+    color: #f0ad2c !important;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.images{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+}
+
+.image{
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.collapse{
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    cursor: pointer;
+}

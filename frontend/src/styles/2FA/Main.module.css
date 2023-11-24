@@ -1,0 +1,84 @@
+.main{
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.sign-supporting{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.sign-supporting>h1{
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+    font-family: "Inter-Variable";
+}
+
+.sign-supporting>span{
+    font-size: 16px;
+    font-weight: 400;
+    color: #f0ad2c;
+    font-family: "Inter-Variable";
+    text-align: center;
+}
+
+.code-input{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+    border: 1px solid #f0ad2c !important;
+    background: #2D2937;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.content-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.content>p{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    font-family: "Inter-Variable";
+    text-align: center;
+}
+
+.content>p>button{
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: #f0ad2c;
+    cursor: pointer;
+}
+
+.error{
+    font-size: 16px;
+    font-weight: 400;
+    color: #ff0000;
+    font-family: "Inter-Variable";
+    text-align: center;
+}

@@ -1,0 +1,121 @@
+.dropdown-container{
+    position: relative;
+}
+
+.dropdown-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 12px 32px;
+    border-radius: 12px;
+    border: 1px solid var(--success-500);
+    cursor: pointer;
+}
+
+.dropdown-wrapper>span{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.dropdown-options{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #2D2937;
+    border: 1px solid var(--success-500);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+    height: 300px;
+    overflow-y: scroll;
+    display: none;
+}
+
+.dropdown-option{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.dropdown-option:hover{
+    background-color: #48405c;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.selected{
+    background-color: #48405c;
+}
+
+.active{
+    display: flex;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+.dropdown-options>input{
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--success-500);
+    background: #2D2937;
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+.skeleton{
+    position: relative;
+    border: none !important;
+    background: transparent;
+    box-shadow: none;
+  }
+  
+  .skeleton-body:hover{
+    transform: scale(1) !important;
+    border: 1px solid var(--settings-border) !important;
+  }
+  
+  .skeleton::after{
+    content: "";
+    background: #eee;
+    background: linear-gradient(90deg, #2D2937 25%, #1F1B27 50%, #2D2937 75%); /* Updated color */
+    background-size: 200% 100%;
+    border: inherit;
+    border-radius: 8px;
+    animation: shimmer 5s infinite;
+    height: 101%;
+    width: 101%;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  

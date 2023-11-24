@@ -1,0 +1,88 @@
+.bar-chart-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    border-radius: 12px;
+}
+
+.bar-chart-container>svg{
+    width: 100%;
+}
+
+.bar-chart-container>svg>g>rect{
+    border-radius: 12px;
+}
+
+.bar-element{
+    height: 20px;
+    align-self: flex-start;
+    border-radius: 0px 4px 4px 0px;
+    background: linear-gradient(90deg, #2D2937 25%, #1F1B27 50%, #2D2937 75%); /* Updated color */
+    background-size: 200% 200%;
+    animation: shimmer 10s infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+.skeleton{
+  position: relative;
+  border: none !important;
+  background: transparent;
+  box-shadow: none;
+}
+
+.skeleton-body:hover{
+  transform: scale(1) !important;
+  border: 1px solid var(--settings-border) !important;
+}
+
+.skeleton::after{
+  content: "";
+  background: #eee;
+  background: linear-gradient(90deg, #2D2937 25%, #1F1B27 50%, #2D2937 75%); /* Updated color */
+  background-size: 200% 100%;
+  border: inherit;
+  border-radius: 8px;
+  animation: shimmer 5s infinite;
+  height: 101%;
+  width: 101%;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+    .bar-chart-container{
+        border-left: none;
+        border-right: none;
+        border-radius: 0px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 968px) {
+
+}
+
+@media only screen and (min-width: 968px)  and (max-width: 1366px) {
+
+}

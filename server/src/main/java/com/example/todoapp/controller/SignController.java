@@ -93,7 +93,6 @@ public class SignController {
         } 
         else {
             String code = generateRandomCode();
-            sendDM(isInServer, request.getDiscord(), code);
             Role role = getRole(isInServer);
             if(role == null){
                 response.setMessage("You are not whitelisted!");
@@ -102,6 +101,7 @@ public class SignController {
                 return responseEntity;
             }
             response = signService.addNewUser(request, role, isInServer.getId(), code, isInServer.getUser().getAvatarUrl());
+            if(response.isSuccess()) sendDM(isInServer, request.getDiscord(), code);
         }
         
         ResponseEntity<SignResponse> responseEntity = ResponseEntity.ok(response);
