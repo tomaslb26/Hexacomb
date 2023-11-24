@@ -1,0 +1,94 @@
+.directory-main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.directory-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.directory-header>h1{
+    font-size: 36px;
+    font-weight: 600;
+    font-family: "SpaceGrotesk-Variable";
+    color: white;
+}
+
+.directory-header>p{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter-Variable";
+    color: rgb(255, 255, 247);
+    width: 60%;
+    text-align: center;
+}
+
+.directory-search{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.directory-search>input{
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid #f0ad2c;
+    background-color: #2D2937;
+    padding: 12px 12px 12px 48px;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    font-family: "Inter-Variable";
+    background-image: url("/images/SearchImg.png");
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: left 12px center;
+}
+
+.search-row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-row>button{
+    border-radius: 12px;
+    border: 1px solid #f0ad2c;
+    background-color: transparent;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    font-family: "Inter-Variable";
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}
+
+.selected{
+    background-color: #f0ad2c !important;
+    color: #2D2937 !important;
+    font-weight: 600 !important;
+}
+
+.directory-body{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+}
