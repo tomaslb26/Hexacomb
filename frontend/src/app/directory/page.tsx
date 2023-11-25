@@ -43,13 +43,21 @@ async function getData(){
   }
 }
 
-export default async function Home() {
+export default async function Home({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+
+  console.log(params, searchParams);
 
   const data : Props = await getData();
 
   return (
       <Layout deleteCookies={deleteCookies} user={data.user}>
-        <MainDirectory submissions={data.submissions} user={data.user} />
+        <MainDirectory isNew={searchParams['new'] ? true : false} submissions={data.submissions} user={data.user} />
       </Layout>
   )
 }

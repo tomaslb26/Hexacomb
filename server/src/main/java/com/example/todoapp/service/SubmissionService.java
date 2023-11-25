@@ -80,4 +80,54 @@ public class SubmissionService {
         }
     }
     
+    public SubmissionResponse updateSubmission(SubmissionRequest submissionRequest, Integer id){
+        Optional<Submission> submission = submissionRepository.findById(id);
+
+        if(submission.isEmpty()){
+            return SubmissionResponse.builder()
+                .success(false)
+                .message("Submission not found")
+                .build();
+        }else{
+            SubmissionStatus status = SubmissionStatus.valueOf(submissionRequest.getStatus().toUpperCase());
+            SubmissionType type = SubmissionType.valueOf(submissionRequest.getType().toUpperCase());
+
+            submission.get().setTitle(submissionRequest.getTitle());
+            submission.get().setDescription(submissionRequest.getDescription());
+            submission.get().setItems(submissionRequest.getItems());
+            submission.get().setX(submissionRequest.getX());
+            submission.get().setY(submissionRequest.getY());
+            submission.get().setZ(submissionRequest.getZ());
+            submission.get().setImages(submissionRequest.getImages());
+            submission.get().setMcName(submissionRequest.getMcName());
+            submission.get().setType(type);
+            submission.get().setStatus(status);
+
+            submissionRepository.save(submission.get());
+            return SubmissionResponse.builder()
+                .success(true)
+                .message("Submission updated")
+                .id(submission.get().getId())
+                .build();
+        }
+    }
+
+
+    public SubmissionResponse deleteSubmission(Integer id){
+        Optional<Submission> submission = submissionRepository.findById(id);
+
+        if(submission.isEmpty()){
+            return SubmissionResponse.builder()
+                .success(false)
+                .message("Submission not found")
+                .build();
+        }else{
+            submissionRepository.delete(submission.get());
+            return SubmissionResponse.builder()
+                .success(true)
+                .message("Submission deleted")
+                .id(submission.get().getId())
+                .build();
+        }
+    }
 }

@@ -15,4 +15,5 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
     
     @Query("SELECT u FROM Submission u WHERE u.userId = :userId")
     Optional<List<Submission>> findSubmissionsByUserId(Integer userId);
+
 }

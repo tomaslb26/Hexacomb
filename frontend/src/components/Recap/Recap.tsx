@@ -86,7 +86,7 @@ export default function Recap(){
                 priority
                 />
                 ))}
-                <embed style={{borderRadius: "12px"}} className={styles['map']} src="https://www.youtube.com/embed/gBkEmbOb9BE?si=C9gjLRBmVkjaahR-" />
+                <embed style={{borderRadius: "12px"}} className={`${styles['map']} ${styles['yt']}`} src="https://www.youtube.com/embed/gBkEmbOb9BE?si=C9gjLRBmVkjaahR-" />
                 <Link href={"https://drive.google.com/file/d/1AG-1qYXxDQ5eg7HeCE82byDo0AeZPQLs/edit"}>
                     World Download <HiOutlineDocumentDownload />
                 </Link>

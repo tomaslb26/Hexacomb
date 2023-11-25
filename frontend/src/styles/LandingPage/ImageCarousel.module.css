@@ -38,3 +38,24 @@
     opacity: 1;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .image-carousel>img{
+    height: auto;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 968px) {
+  .image-carousel>img{
+    height: auto;
+  }
+}
+
+@media only screen and (min-width: 968px)  and (max-width: 1366px) {
+
+  .navbar{
+      padding: 20px 40px;
+  }
+
+}

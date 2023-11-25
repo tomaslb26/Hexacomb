@@ -11,6 +11,7 @@ import { RxCross2 } from "react-icons/rx";
 import Axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 import { uploadPhoto } from "@/utils/uploadPhoto";
+import { usePathname } from "next/navigation";
 
 const CreateSubmission = forwardRef<HTMLDivElement, {
     submission?: Submission,
@@ -20,8 +21,6 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
 ((props, ref: ForwardedRef<HTMLDivElement>) => {
 
     const { setDisable } = props;
-
-    console.log(props.submission);
     
     const {
         register,
@@ -52,6 +51,8 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
     const [uploaded, setUploaded] = useState<(string | File)[]>([]);
     const [error, setError] = useState<string>("");
     const [isSaving, setIsSaving] = useState<boolean>(false);
+
+    const pathname = usePathname();
 
     useEffect(() => {
         if(props.submission){
@@ -88,13 +89,14 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
         };
 
         (async() => {
-            const res = await fetch(`/api/${props.submission ? "edit" : "create"}_submission`, {
+            const res = await fetch(props.submission ? `/api/update_submission` : "/api/create_submission", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(submission)
             });
+
             const dataReceived = await res.json() as {success?: boolean, message: string, id: string};
 
             if(!dataReceived.success){
@@ -103,7 +105,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
             }
             else {
                 setIsSaving(false);
-                window.location.reload();
+                pathname === "/directory" ? window.location.href = "/directory" : window.location.reload();
             }
         })();
     })
@@ -261,17 +263,19 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                         gap: "1rem"
                     }}>
                         <h6>Images</h6>
-                        <label className={styles['image-upload']} htmlFor="image-upload">
-                            <h6>CHOOSE FILE</h6>
-                            <p>{uploaded.length === 0 ? "No file chosen" : uploaded[0].name}</p>
-                        </label>
-                        <input onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                            if(event.target.files && event.target.files.length > 0 && event.target.files.length + uploaded.length <= 3){
-                                setUploaded((prev) => {
-                                    return [...prev, ...Array.from(event.target.files)];
-                                })
-                            }
-                        }} type="file" name="image-upload" id="image-upload" style={{display: "none"}} />
+                        {uploaded.length <= 3 &&
+                        <>
+                            <label className={styles['image-upload']} htmlFor="image-upload">
+                                <h6>CHOOSE FILE</h6>
+                            </label>
+                            <input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                if(event.target.files && event.target.files.length > 0 && event.target.files.length + uploaded.length <= 3){
+                                    setUploaded((prev) => {
+                                        return [...prev, ...Array.from(event.target.files)];
+                                    })
+                                }
+                            }} type="file" name="image-upload" id="image-upload" style={{display: "none"}} />
+                        </>}
                         {
                             uploaded.length > 0 &&
                             <div className={styles['images']}>

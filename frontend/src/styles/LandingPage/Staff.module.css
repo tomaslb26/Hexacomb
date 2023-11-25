@@ -45,3 +45,14 @@
     color: white;
     font-family: "SpaceGrotesk-Variable";
 }
+
+@media only screen and (max-width: 768px) {
+    .staff-heads{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .staff-container{
+        width: 100%;
+    }
+}

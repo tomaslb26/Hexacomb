@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.todoapp.model.ItemSale;
 import com.example.todoapp.model.SubmissionType;
+import com.example.todoapp.model.Submission.SubmissionStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,4 +25,5 @@ public class SubmissionRequest {
     private List<String> images;
     private String mcName;
     private String type;
+    private String status;
 }

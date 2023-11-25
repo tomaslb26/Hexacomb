@@ -17,6 +17,7 @@ import { CookiesContext } from "../Layout/Layout";
 import Folder from "../SVG/Folder";
 import Recap from "../Recap/Recap";
 import { RxCaretDown } from "react-icons/rx";
+import { LuFolderSearch2 } from "react-icons/lu";
 
 
 export default function Navbar(props: {user?: User}) {
@@ -78,7 +79,8 @@ export default function Navbar(props: {user?: User}) {
                 <Image onClick={() => setToggle((prev) => !prev)} src={user.avatarUrl} alt="User Avatar" width={48} height={48} />
                 {toggle &&
                 <div className={styles['user-dropdown']}>
-                    <button><FaPlus /> New Submission</button>
+                    <Link href={"/directory?new=true"}><button><FaPlus /> New Submission</button></Link>
+                    <Link href={`/profile/submissions`}><button><LuFolderSearch2 /> Your Submissions</button></Link>
                     <button onClick={handleLogout} ><PiSignOutBold /> Logout</button>
                 </div>}
             </div>

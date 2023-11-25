@@ -2,7 +2,7 @@
 
 import styles from "@/styles/Directory/Main.module.css"
 import Image from "next/image"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Dropdown from "../Reusable/Dropdown";
 import { mcObjects } from "@/types/minecraftObjects";
 import { Submission } from "@/types/submission";
@@ -14,13 +14,26 @@ import { User } from "@/types/user";
 import { HiPlus } from "react-icons/hi";
 import Folder from "../SVG/Folder";
 import Link from "next/link";
+import NotFound from "../Reusable/NotFound";
+import { useRouter } from "next/navigation";
 
 export default function MainDirectory(props: {
     submissions?: Submission[],
-    user?: User
+    user?: User,
+    isNew?: boolean
 }) {
 
-    const {submissions, user} = props;
+
+    const {submissions, user, isNew} = props;
+
+    useEffect(() => {
+        if(isNew){
+            setDisableScrollbar(true);
+            if(createRef.current){
+                createRef.current.style.display = 'flex';
+            }
+        }
+    }, [isNew])
 
     const [search, setSearch] = useState<{
         query: string,
@@ -77,46 +90,53 @@ export default function MainDirectory(props: {
                 }} className="default-button"><HiPlus /> Create Submission</button>
                 <Link href={"/profile/submissions"}><button className="default-button"><Folder /> See Submissions</button></Link>
                 </div>}
-                <input onChange={
-                    (e) => {
-                        setSearch((prev) => {
-                            return {
-                                ...prev,
-                                query: e.target.value
-                            }
-                        })
-                    }
-                } value={search.query} type="text" placeholder="Search for something"/>
-                <div className={styles['search-row']}>
-                    <button onClick={() => {
-                        setSearch((prev) => {
-                            return {
-                                ...prev,
-                                type: "SHOP"
-                            }
-                        })
-                    }} className={`${search.type === "SHOP" ? styles['selected'] : ""}`}>Shop</button>
-                    <button onClick={() => {
-                        setSearch((prev) => {
-                            return {
-                                ...prev,
-                                type: "POI"
-                            }
-                        })
-                    }} className={`${search.type === "POI" ? styles['selected'] : ""}`}>Point of Interest</button>
-                    {search.type === "SHOP" && <Dropdown
-                    options={mcObjects} selected={search.item === "" ? "Select an item" : search.item}
-                    isBlock={false}
-                    setSelected={(value: string) => {
-                        setSearch((prev) => {
-                            return {
-                                ...prev,
-                                item: value
-                            }
-                        })
-                    }} />}
-                </div>
+                {submissions?.length > 0 
+                &&
+                <>
+                    <input onChange={
+                        (e) => {
+                            setSearch((prev) => {
+                                return {
+                                    ...prev,
+                                    query: e.target.value
+                                }
+                            })
+                        }
+                    } value={search.query} type="text" placeholder="Search for something"/>
+                    <div className={styles['search-row']}>
+                        <button onClick={() => {
+                            setSearch((prev) => {
+                                return {
+                                    ...prev,
+                                    type: "SHOP"
+                                }
+                            })
+                        }} className={`${search.type === "SHOP" ? styles['selected'] : ""}`}>Shop</button>
+                        <button onClick={() => {
+                            setSearch((prev) => {
+                                return {
+                                    ...prev,
+                                    type: "POI"
+                                }
+                            })
+                        }} className={`${search.type === "POI" ? styles['selected'] : ""}`}>Point of Interest</button>
+                        {search.type === "SHOP" && <Dropdown
+                        options={mcObjects} selected={search.item === "" ? "Select an item" : search.item}
+                        isBlock={false}
+                        setSelected={(value: string) => {
+                            setSearch((prev) => {
+                                return {
+                                    ...prev,
+                                    item: value
+                                }
+                            })
+                        }} />}
+                    </div>
+                </>}
             </div>
+            {submissions?.length === 0 ?
+            <NotFound title="No submissions found." description="There are no submissions yet, you have to wait until someone creates one." />
+            :
             <div className={styles['directory-body']}>
                 {submissions?.filter((submission) => isQueried(submission) && isItemInSubmission(submission) && (!search.type || submission.type === search.type))
                 .map((submission, index) => {
@@ -128,7 +148,7 @@ export default function MainDirectory(props: {
                         }
                     }} key={index} submission={submission} />
                 })}
-            </div>
+            </div>}
         </div>
     )
 }

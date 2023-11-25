@@ -12,6 +12,7 @@ import Calendar from "../SVG/Calendar";
 import Star from "../SVG/Star";
 import ImageCarousel from "./ImageCarousel";
 import Staff from "./Staff";
+import Link from "next/link";
 
 export default function Hero() {
 
@@ -28,11 +29,13 @@ export default function Hero() {
                     </div>
                     <p>Embark on a blocky odyssey within our thriving Minecraft community, where creativity knows no bounds, and every pixel tells a story of endless exploration and collaboration!</p>
                     <div className={styles['buttons-container']}>
-                        <button className="default-button bigger"><FaDiscord /> Join Us</button>
+                        <Link href="https://discord.com/invite/yj9vmgSrse">
+                            <button className="default-button bigger"><FaDiscord /> Join Us</button>
+                        </Link>
                     </div>               
                 </div>
                 <div className={styles['check-section']}>
-                    {players && 
+                    {players !== undefined && 
                     <div className={styles['check-container']}>
                         <GamingIcon />
                         <p>{`Currently ${players} players online.`}</p>

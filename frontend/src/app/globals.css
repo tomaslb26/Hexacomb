@@ -92,6 +92,11 @@ a {
   stroke: white;
 }
 
+.delete{
+  background: #d92d20;
+}
+
+
 .bigger{
   font-size: 20px;
   padding: 10px 40px;
@@ -106,6 +111,11 @@ a {
 
 .default-button:hover{
   background: #0f9e5e;
+  transition: background 0.2s ease-in-out;
+}
+
+.delete:hover{
+  background: #b71c1c;
   transition: background 0.2s ease-in-out;
 }
 

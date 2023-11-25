@@ -125,3 +125,52 @@
     background-color: #48405c;
     transition: background-color 0.2s ease-in-out;
 }
+
+@media only screen and (max-width: 768px) {
+    .main-wrapper{
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .main-heading{
+        width: 100%;
+    }
+
+    .main-heading>h1, .info-wrapper>h1{
+        font-size: 20px;
+        width: 100%;
+    }
+
+    .main-heading>p{
+        font-size: 16px;
+    }
+    
+    .map{
+        width: 100%;
+        aspect-ratio: 16/9;
+    }
+
+    .yt{
+        height: auto !important;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 968px) {
+    .main-wrapper{
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .main-heading{
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 968px)  and (max-width: 1366px) {
+
+    .layout-main{
+        padding: 150px 40px 24px 40px;
+    }
+
+}
