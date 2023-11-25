@@ -113,6 +113,11 @@ export default function PlayersStats(){
     }, [player, season])
 
 
+    useEffect(() => {
+        console.log(data)
+
+    }, [data])
+
     return(
         <div className={styles['players-main']}>
             <Dropdown options={["Season 1", "Season 2", "Season 3", "Season 4"]} selected={season === undefined ? "Select a season" : `Season ${season}`}
@@ -121,7 +126,7 @@ export default function PlayersStats(){
                 <div className={`${styles['sidepanel']} ${isLoadingSeason ? styles['skeleton'] : ""}`}>
                     {players.length > 0 && <Dropdown options={players} selected={player === undefined ? "Select a player" : player}
                     isBlock={false} input={true} setSelected={(value: string) => setPlayer(value)} skeleton={isLoadingSeason} isPlayer />}
-                    {player &&
+                    {player && data.custom && data.mined && data.crafted && data.dropped &&
                     <div className={`${styles['sidepanel-container']} ${isLoading ? styles['skeleton'] : ""}`}>
                         {player && <PlayerImage player={player} />}
                         <div className="divider" />

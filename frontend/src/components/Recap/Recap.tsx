@@ -56,8 +56,8 @@ export default function Recap(){
                 className={`${styles.image} ${
                     index === currentS1Image ? styles.visible : styles.hidden
                 }`}
-                width={600}
-                height={300}
+                width={1000}
+                height={1000}
                 src={`/images/Season 1/${index}.jpg`}
                 alt={`Image ${index}`}
                 quality={100}
@@ -78,8 +78,8 @@ export default function Recap(){
                 className={`${styles.image} ${
                     index === currentS2Image ? styles.visible : styles.hidden
                 }`}
-                width={600}
-                height={300}
+                width={1000}
+                height={1000}
                 src={`/images/Season 2/${index}.png`}
                 alt={`Image ${index}`}
                 quality={100}
@@ -102,8 +102,8 @@ export default function Recap(){
                 className={`${styles.image} ${
                     index === currentS3Image ? styles.visible : styles.hidden
                 }`}
-                width={600}
-                height={300}
+                width={1000}
+                height={1000}
                 src={`/images/Season 3/${index}.png`}
                 alt={`Image ${index}`}
                 quality={100}

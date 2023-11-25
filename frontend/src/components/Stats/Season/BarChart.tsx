@@ -11,6 +11,7 @@ import shortenNumber from "@/utils/shortenNumber";
 import Dropdown from "@/components/Reusable/Dropdown";
 import { StatsContext } from "./SeasonStats";
 import LoadingBarChart from "./LoadingBarChart";
+import { time } from "console";
 
 function SVGBar(props: {
     data: {
@@ -20,7 +21,7 @@ function SVGBar(props: {
     time: boolean,
 }){
 
-    const {data} = props;
+    const {data, time} = props;
 
     const width = 500;
     const height = 400;
@@ -91,7 +92,6 @@ function SVGBar(props: {
     const numInputs = 10;
     const inputRefs = useRef<Array<HTMLOrSVGImageElement | null>>([]);
     inputRefs.current = Array.from({ length: numInputs }, () => null);
-
     return(
         <svg ref={svgRef} width={width} height={height}>
             {data.map((d, i) => {
@@ -168,7 +168,7 @@ export default function BarChart(props: {
                     }
                 })
             }} />
-            <SVGBar time={props.title.toLocaleLowerCase() === "time"} data={props.data} />
+            <SVGBar time={props.selected.toLocaleLowerCase().includes("time")} data={props.data} />
         </div>
     )
 

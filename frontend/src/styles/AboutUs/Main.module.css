@@ -60,10 +60,7 @@
     font-size: 16px;
     font-weight: 500;
     background-color: #2D2937;
-<<<<<<< HEAD
-=======
     color: white;
->>>>>>> 26ecfb80fce34aa6e1aac86841f77875e8a13685
 }
 
 .server-info{
@@ -110,6 +107,7 @@
     padding: 8px 16px;
     background-color: #2D2937;
     border: 1px solid #f0ad2c;
+    color: white;
     display: flex;
     align-items: center;
     gap: 8px;

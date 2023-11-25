@@ -106,7 +106,7 @@
     width: 100%;
     scrollbar-width: thin;
     scrollbar-color: #f0ad2c rgba(221, 213, 213, 0.5);
-    overflow: auto;
+    overflow-x: auto;
 }
 
 .percentile-container{
@@ -119,6 +119,7 @@
     border-left: 1px solid #f0ad2c;
     padding: 0 16px;
     white-space: nowrap;
+    color: #fff;
 }
 
 .bottom-panel::-webkit-scrollbar {
@@ -147,7 +148,7 @@
     width: 23px;
     background-color: #f0ad2c;
     border-radius: 4px 4px 0px 0;
-    bottom: 30px;
+    bottom: 33px;
 }
 
 .bar{

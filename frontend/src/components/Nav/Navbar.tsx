@@ -15,10 +15,9 @@ import { PiSignOutBold } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa6";
 import { CookiesContext } from "../Layout/Layout";
 import Folder from "../SVG/Folder";
-<<<<<<< HEAD
-=======
 import Recap from "../Recap/Recap";
->>>>>>> 26ecfb80fce34aa6e1aac86841f77875e8a13685
+import { RxCaretDown } from "react-icons/rx";
+
 
 export default function Navbar(props: {user?: User}) {
 
@@ -38,24 +37,38 @@ export default function Navbar(props: {user?: User}) {
         <nav className={styles['navbar']}>
             <Image src="/images/HexaLogo.png" alt="Hexa Logo" width={50} height={50} />
             <div className={styles['nav-buttons']}>
-                <Link className={`${pathname === "/" ? styles['selected'] : ""}`} href="/"><Home /> Home</Link>
-<<<<<<< HEAD
-                <Link className={`${pathname === "/about" ? styles['selected'] : ""}`} href="/about"><About /> About</Link>
-                <Link className={`${pathname === "/recap" ? styles['selected'] : ""}`} href="/recap"><BookClosed /> Season Recap</Link>
-                <Link className={`${pathname === "/stats/seasons" ? styles['selected'] : ""}`} href="/stats/seasons"><BarChart /> Season Stats</Link>
-                <Link className={`${pathname === "/stats/players" ? styles['selected'] : ""}`} href="/stats/players"><UserSquare /> Player Stats</Link>
-=======
+                <Link className={`${pathname === "/" ? styles['selected'] : ""}`} href="/">Home <Home /> </Link>
                 <div className={styles['dropdown']}>
-                    <h2><BookClosed /> Overview</h2>
-                    <div className={styles['dropdown-content']}>
-                        <Link className={`${styles['dropdown-item']}`} href="/about">
-                            <h6><About /> About</h6>
-                            <p>A brief introduction on how Hexacomb works and who are the staff members</p>
-                        </Link>
+                    <h2 className={`${pathname === "/about" || pathname === "/recap" ? styles['selected'] : ""}`} >Overview <RxCaretDown /></h2>
+                    <div className={styles['content-wrapper']}>
+                        <div className={styles['dropdown-content']}>
+                            <Link className={`${styles['dropdown-item']} ${pathname === "/about" ? styles['selected-item'] : ""}`} href="/about">
+                                <h6>About <About /></h6>
+                                <p>A brief introduction on how Hexacomb works and who are the staff members</p>
+                            </Link>
+                            <Link className={`${styles['dropdown-item']} ${pathname === "/recap" ? styles['selected-item'] : ""}`} href="/recap">
+                                <h6>Season Recap <BookClosed /> </h6>
+                                <p>Take a look into Hexacomb&apos;s past and its evolution</p>
+                            </Link>
+                        </div>
                     </div>
                 </div>
->>>>>>> 26ecfb80fce34aa6e1aac86841f77875e8a13685
-                <Link className={`${pathname === "/directory" ? styles['selected'] : ""}`} href="/directory"><Folder /> Directory</Link>
+                <div className={styles['dropdown']}>
+                    <h2 className={`${pathname.includes("stats") ? styles['selected'] : ""}`}>Stats <RxCaretDown /></h2>
+                    <div className={styles['content-wrapper']}>
+                        <div className={styles['dropdown-content']}>
+                            <Link className={`${styles['dropdown-item']} ${pathname === "/stats/seasons" ? styles['selected-item'] : ""}`} href="/stats/seasons">
+                                <h6>Season Stats <BarChart /> </h6>
+                                <p>Explore the top players in specific categories choosen by you</p>
+                            </Link>
+                            <Link className={`${styles['dropdown-item']} ${pathname === "/stats/players" ? styles['selected-item'] : ""}`} href="/stats/players">
+                                <h6>Player Stats <UserSquare /> </h6>
+                                <p>Explore your stats and see how you compare with your friends</p>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                <Link className={`${pathname === "/directory" ? styles['selected'] : ""}`} href="/directory">Directory <Folder /></Link>
             </div>
 
             {!user ?

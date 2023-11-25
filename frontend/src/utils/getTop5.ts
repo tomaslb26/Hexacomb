@@ -1,4 +1,6 @@
 export default function getTop5(data: object){
+    if(!data) return []
+
     let sumArray = []
     for (const [key, value] of Object.entries(data)) {
         if(key === "player") continue

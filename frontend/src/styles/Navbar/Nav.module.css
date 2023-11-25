@@ -25,10 +25,7 @@
     gap: 8px;
     align-items: center;
     stroke: white;
-<<<<<<< HEAD
-=======
     color: white;
->>>>>>> 26ecfb80fce34aa6e1aac86841f77875e8a13685
     padding: 6px 12px;
     border-radius: 12px;
     border: 1px solid transparent;
@@ -104,6 +101,7 @@
     font-size: 16px;
     font-weight: 500;
     white-space: nowrap;
+    color: white;
 }
 
 .user-dropdown>button:last-child{
@@ -112,12 +110,11 @@
 
 .user-dropdown>button:hover{
     background: #48405c;
-<<<<<<< HEAD
-=======
 }
 
 .dropdown{
     display: flex;
+    justify-content: center;
     position: relative;
 }
 
@@ -129,6 +126,16 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    padding: 6px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.dropdown>h2:hover{
+    background: #f0ad2c;
+    border: 1px solid #978080;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    transition: background 0.2s ease-in-out, border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .dropdown>h2>svg{
@@ -136,23 +143,61 @@
     height: 20px;
 }
 
-.dropdown-content{
+.content-wrapper{
     position: absolute;
-    width: 300px;
-    border-radius: 12px;
-    background: red;
-    top: 120%;
+    top: 100%;
+    padding-top: 10%;
+    display: none;
+}
+
+.dropdown-content{
     display: flex;
+    width: 400px;
+    border-radius: 12px;
+    background: #2D2937;
+    border: 1px solid #f0ad2c;
     flex-direction: column;
     gap: 16px;
+    padding: 12px;
 }
+
+
+
+.dropdown:hover .content-wrapper{
+    display: flex;
+    animation: fadeInPop 0.2s ease-in-out;
+}
+
+@keyframes fadeInPop {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(0.7);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 
 .dropdown-item{
     width: 100%;
     padding: 12px 16px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
+    border-radius: 12px;
+}
+
+.dropdown-item:hover{
+    background: #48405c;
+}
+
+.selected-item{
+    background: #48405c;
 }
 
 .dropdown-item>h6{
@@ -168,5 +213,4 @@
 .dropdown-item>h6>svg{
     width: 20px;
     height: 20px;
->>>>>>> 26ecfb80fce34aa6e1aac86841f77875e8a13685
 }
