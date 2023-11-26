@@ -32,17 +32,6 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
         reset,
         formState: { errors },
       } = useForm<Submission>({
-        defaultValues:
-        {
-            title: props.submission?.title,
-            description: props.submission?.description,
-            type: props.submission?.type || "SHOP",
-            items: props.submission?.items || [],
-            mcName: props.submission?.mcName,
-            x: props.submission?.x,
-            y: props.submission?.y,
-            z: props.submission?.z
-        }
       });
     const [selectedItem, setSelectedItem] = useState<ItemSale>({
         item: mcObjects[0],
@@ -59,8 +48,22 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
             reset(props.submission);
             setUploaded(props.submission.images.map((image) => {
                 return image;
-            }
-            ));
+            }));
+        }
+        else{
+            reset({
+                title: "",
+                description: "",
+                type: "SHOP",
+                items: [],
+                mcName: "",
+                x: "",
+                y: "",
+                z: "",
+                images: []
+            
+            });
+            setUploaded([]);
         }
     }, [props.submission, reset])
 
@@ -116,6 +119,19 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
         } else if (ref && ref.current) {
             setDisable(false);
             ref.current.style.display = 'none'; // Access the current property of the mutable ref object
+            reset({
+                title: "",
+                description: "",
+                type: "SHOP",
+                items: [],
+                mcName: "",
+                x: "",
+                y: "",
+                z: "",
+                images: []
+            
+            });
+            setUploaded([]);
         }
     }
 

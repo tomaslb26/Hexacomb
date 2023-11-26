@@ -19,6 +19,7 @@
     font-weight: 600;
     color: white;
     font-family: "Inter-Variable";
+    text-align: center;
 }
 
 .sign-supporting>span{
@@ -26,6 +27,7 @@
     font-weight: 400;
     color: #f0ad2c;
     font-family: "Inter-Variable";
+    text-align: center;
 }
 
 .input-row{
@@ -83,4 +85,14 @@
 .login>a>button:hover{
     text-decoration: underline;
     text-underline-offset: 4px;
+}
+
+@media only screen and (max-width: 768px) {
+    .input-row{
+        width: 100%;
+    }
+
+    .sign-main{
+        padding: 0px 16px;
+    }
 }

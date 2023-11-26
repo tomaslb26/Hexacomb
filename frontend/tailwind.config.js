@@ -14,6 +14,10 @@ module.exports = {
         "primary-yellow": "#f0ad2c",
       },
     },
+    screens: {
+      'md': {'max': '768px'},
+      // => @media (max-width: 767px) { ... }
+    }
   },
   plugins: [require("daisyui")],
 }

@@ -105,3 +105,23 @@
 
     cursor: pointer;
 }
+
+@media only screen and (max-width: 768px) {
+
+    .submission-view{
+        width: 100%;
+        height: 100%;
+        padding: 32px 16px;
+        border-radius: 0px;
+        border: none;
+        max-height: 100%;
+    }
+
+    .submission-view>p{
+        word-break: break-word;
+    }
+
+    .images{
+        grid-template-columns: 1fr;
+    }
+}
