@@ -1,6 +1,7 @@
 package com.example.todoapp.controller;
 
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -66,7 +67,7 @@ public class SubmissionController {
     @PutMapping("/update/{id}")
     public ResponseEntity<SubmissionResponse> updateSubmission(
         @RequestBody SubmissionRequest submission,
-        @PathVariable("id") Integer id
+        @PathVariable("id") UUID id
     ) {
         SubmissionResponse response = submissionService.updateSubmission(submission, id);
         return ResponseEntity.ok(response);
@@ -74,7 +75,7 @@ public class SubmissionController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<SubmissionResponse> deleteSubmission(
-        @PathVariable("id") Integer id
+        @PathVariable("id") UUID id
     ) {
         SubmissionResponse response = submissionService.deleteSubmission(id);
         return ResponseEntity.ok(response);

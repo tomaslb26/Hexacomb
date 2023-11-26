@@ -2,7 +2,9 @@ package com.example.todoapp.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,10 @@ import com.example.todoapp.model.LoginRequest;
 import com.example.todoapp.model.Role;
 import com.example.todoapp.model.SignRequest;
 import com.example.todoapp.model.SignResponse;
+import com.example.todoapp.model.Request.ResetRequest;
 import com.example.todoapp.service.SignService;
+import com.example.todoapp.service.UserService;
+
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 
@@ -27,10 +32,12 @@ public class SignController {
 
     private final SignService signService;
     private DiscordBotConfig discordBotConfig;
+    private UserService userService;
 
     @Autowired
-    public SignController(SignService signService, DiscordBotConfig discordBotConfig) {
+    public SignController(SignService signService, DiscordBotConfig discordBotConfig, UserService userService) {
         this.signService = signService;
+        this.userService = userService;
         this.discordBotConfig = discordBotConfig;
     }
 
@@ -46,8 +53,16 @@ public class SignController {
             // Send a message to the channel that the message was sent in
             discordBotConfig.SendMessageInChannel("User: " + user.getAsMention() + " has just signed up!");
         }
+    }
 
-
+    public void sendRecoveryLink(Member member, String discordUsername, String message, String username){
+        User user = member.getUser();
+        if (!user.isBot()) {
+            // Send a direct message to the user who sent the message
+            user.openPrivateChannel().queue(privateChannel ->
+                    privateChannel.sendMessage("Hello, " + user.getAsMention() + "! Your recovery link is: https://www.hexacomb.net/reset?id=" + message + "&username=" + username).queue()
+            );
+        }
     }
 
     public Role getRole(Member member){
@@ -112,6 +127,49 @@ public class SignController {
     public ResponseEntity<SignResponse> loginUser(@RequestBody LoginRequest request) {
         SignResponse response = new SignResponse();
         response = signService.loginUser(request);
+        ResponseEntity<SignResponse> responseEntity = ResponseEntity.ok(response);
+        return responseEntity;
+    }
+
+    @PostMapping("/forgot")
+    public ResponseEntity<SignResponse> forgotPassword(@RequestBody Map<String, String> body) {
+        SignResponse response = new SignResponse();
+        String username = body.get("username");
+        com.example.todoapp.model.User user = userService.getUserByUsername(username);
+    
+        if (user == null) {
+            response.setMessage("No user found in the server!");
+            response.setSuccess(false);
+        } 
+        else {
+            UUID uuid = UUID.randomUUID();
+            String uuidAsString = uuid.toString();
+            response = userService.setRecoveryCode(user, uuidAsString);
+            if(response.isSuccess()){
+                Member isInServer = discordBotConfig.isUserInServer(user.getDiscord()).join();
+                if(isInServer != null){
+                    sendRecoveryLink(isInServer, user.getDiscord(), uuidAsString, user.getUsername());
+                }
+            } 
+        }
+        
+        ResponseEntity<SignResponse> responseEntity = ResponseEntity.ok(response);
+        return responseEntity;
+    }
+
+    @PostMapping("/reset")
+    public ResponseEntity<SignResponse> resetPassword(@RequestBody ResetRequest request) {
+        SignResponse response = new SignResponse();
+        com.example.todoapp.model.User user = userService.getUserByUsername(request.getUsername());
+    
+        if (user == null) {
+            response.setMessage("No user found in the server!");
+            response.setSuccess(false);
+        } 
+        else {
+            response = signService.resetPassword(user, request.getRecoveryToken(), request.getPassword());
+        }
+        
         ResponseEntity<SignResponse> responseEntity = ResponseEntity.ok(response);
         return responseEntity;
     }

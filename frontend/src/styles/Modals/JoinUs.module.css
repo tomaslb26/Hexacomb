@@ -1,0 +1,120 @@
+.modal{
+    border-radius: 12px;
+    width: 700px;
+    position: relative;
+    border: 1px solid #f0ad2c;
+    background: linear-gradient(to bottom right, #2D2937, #1A1625);
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 32px;
+}
+
+.modal>img{
+    width: 100%;
+    height: auto;
+    animation: roll-in-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    -webkit-animation: roll-in-left 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.modal-content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    animation: fade-in 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s forwards;
+}
+
+.modal-content>h1{
+    font-size: 36px;
+    font-weight: 600;
+    font-family: "SpaceGrotesk-Variable";
+    color: white;
+    margin: 0px;
+    text-align: center;
+    line-height: 1;
+}
+
+.modal-content>h2{
+    font-size: 18px;
+    font-weight: 400;
+    color: rgb(219, 219, 211);
+    margin: 0px;
+    text-align: center;
+}
+
+.modal>button, .modal>a>button{
+    opacity: 0;
+    animation: fade-in 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s forwards;
+}
+
+@keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @-webkit-keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+.close{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+
+    color: white;
+    font-size: 24px;
+}
+
+@-webkit-keyframes roll-in-left {
+    0% {
+      -webkit-transform: translateX(-800px) rotate(-540deg);
+              transform: translateX(-800px) rotate(-540deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0) rotate(0deg);
+              transform: translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+  }
+  @keyframes roll-in-left {
+    0% {
+      -webkit-transform: translateX(-800px) rotate(-540deg);
+              transform: translateX(-800px) rotate(-540deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0) rotate(0deg);
+              transform: translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .modal{
+        width: 100%;
+        border-radius: 0px;
+        padding: 16px;
+        border-right: none;
+        border-left: none;
+    }
+
+    .modal-content{
+        gap: 16px;
+    }
+}

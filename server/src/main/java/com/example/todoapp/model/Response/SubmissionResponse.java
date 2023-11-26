@@ -1,6 +1,7 @@
 package com.example.todoapp.model.Response;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.example.todoapp.model.Submission.Submission;
 
@@ -16,6 +17,6 @@ import lombok.NoArgsConstructor;
 public class SubmissionResponse {
     private boolean success;
     private String message;
-    private Integer id;
+    private UUID id;
     private List<Submission> submissions;
 }

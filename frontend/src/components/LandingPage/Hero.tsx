@@ -4,7 +4,7 @@ import styles from "@/styles/LandingPage/Hero.module.css"
 import Image from "next/image"
 import ExternalLink from "../SVG/ExternalLink"
 import useGetOnlinePlayers from "@/app/helpers/useGetOnlinePlayers"
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GamingIcon from "../SVG/GamingIcon";
 import {FaDiscord} from "react-icons/fa";
 import UsersPlus from "../SVG/UsersPlus";
@@ -13,14 +13,33 @@ import Star from "../SVG/Star";
 import ImageCarousel from "./ImageCarousel";
 import Staff from "./Staff";
 import Link from "next/link";
+import JoinUs from "../Modals/JoinUs";
+import { User } from "@/types/user";
+import useDisableScrollbar from "@/utils/useDisableScrollbar";
 
-export default function Hero() {
+export default function Hero(props: {
+    user?: User
+}) {
 
     const [players, setPlayers] = useState<number | undefined>(undefined);
     useGetOnlinePlayers(setPlayers);
 
+    const [disableScrollbar, setDisableScrollbar] = useState<boolean>(false);
+    useDisableScrollbar(disableScrollbar);
+
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if(props.user === undefined && modalRef.current){
+            modalRef.current.style.display = "flex";
+            setDisableScrollbar(true);
+        }
+    }, [props.user])
+
+
     return(
         <div className={styles['hero']}>
+            <JoinUs setDisable={setDisableScrollbar} ref={modalRef} />
             <div className={styles['hero-wrapper']}>
                 <div className={styles['main-section']}>
                     <div className={styles['heading-container']}>

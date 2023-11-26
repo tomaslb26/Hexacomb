@@ -1,4 +1,5 @@
-package com.example.todoapp.model;
+package com.example.todoapp.model.Request;
+
 
 import java.util.UUID;
 
@@ -11,11 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetUserResponse {
+public class ResetRequest {
     private String username;
-    private String discord;
-    private Role role;
-    private boolean isVerified;
-    private UUID id;
-    private String avatarUrl;
+    private UUID recoveryToken;
+    private String password;
 }

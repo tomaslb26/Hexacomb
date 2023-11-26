@@ -3,7 +3,9 @@ package com.example.todoapp.model;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +23,9 @@ import jakarta.persistence.Table;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private UUID id;
     private String discord;
     private String username;
     private String password;
@@ -33,6 +36,7 @@ public class User implements UserDetails {
     private LocalDate createdAt;
     @Enumerated
     private Role role;
+    private UUID resetPasswordToken;
 
     // Default constructor is important for JPA
     public User() {
@@ -86,6 +90,14 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UUID getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
+    public void setResetPasswordToken(UUID resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
     }
 
     public void setDiscord(String discord) {
@@ -143,7 +155,7 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 

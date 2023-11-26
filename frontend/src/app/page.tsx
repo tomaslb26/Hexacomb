@@ -36,7 +36,7 @@ export default async function Home() {
 
   return (
       <Layout deleteCookies={deleteCookies} user={user}>
-        <Hero />
+        <Hero user={user} />
       </Layout>
   )
 }

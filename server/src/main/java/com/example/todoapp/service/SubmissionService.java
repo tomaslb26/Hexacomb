@@ -14,6 +14,8 @@ import com.example.todoapp.model.Submission.Submission;
 import com.example.todoapp.model.Submission.SubmissionStatus;
 import com.example.todoapp.repository.SubmissionRepository;
 import java.util.Optional;
+import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -80,7 +82,7 @@ public class SubmissionService {
         }
     }
     
-    public SubmissionResponse updateSubmission(SubmissionRequest submissionRequest, Integer id){
+    public SubmissionResponse updateSubmission(SubmissionRequest submissionRequest, UUID id){
         Optional<Submission> submission = submissionRepository.findById(id);
 
         if(submission.isEmpty()){
@@ -113,7 +115,7 @@ public class SubmissionService {
     }
 
 
-    public SubmissionResponse deleteSubmission(Integer id){
+    public SubmissionResponse deleteSubmission(UUID id){
         Optional<Submission> submission = submissionRepository.findById(id);
 
         if(submission.isEmpty()){

@@ -2,6 +2,7 @@ package com.example.todoapp.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -82,6 +83,26 @@ public class SignService {
             return SignResponse
                     .builder()
                     .message("Invalid username/password supplied")
+                    .success(false)
+                    .build();
+        }
+    }
+
+    public SignResponse resetPassword(User user, UUID recoveryToken, String newPassword){
+        if(user.getResetPasswordToken().equals(recoveryToken)){
+            String encodedPassword = bCryptPasswordEncoder.encode(newPassword);
+            user.setPassword(encodedPassword);
+            userRepository.save(user);
+            return SignResponse
+                    .builder()
+                    .message("Password changed successfully")
+                    .success(true)
+                    .build();
+        }
+        else{
+            return SignResponse
+                    .builder()
+                    .message("Invalid recovery token")
                     .success(false)
                     .build();
         }

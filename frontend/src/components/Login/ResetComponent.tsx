@@ -6,16 +6,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 
-export default function LoginComponent(){
+export default function ResetComponent(props: {username?: string, recoveryToken?: string}){
     const [formData, setFormData] = useState({
-        username: "",
-        password: ""
+        username: props.username ?? "",
     });
 
     const [error, setError] = useState<string | null>();
 
-    const { username, password } = formData;
+    const { username} = formData;
     const router = useRouter();
+    const [done, setDone] = useState(false);
 
     const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,23 +23,24 @@ export default function LoginComponent(){
 
     function handleSubmit(){
         (async() => {
-            const res = await fetch("/api/login", {
+            const res = await fetch("/api/forgot", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    username,
-                    password
+                    username
                 })
             });
             const dataReceived = await res.json() as {success?: boolean, message: string, token?: string};
+
+            console.log(dataReceived);
 
             if(!dataReceived.success){
                 setError(dataReceived.message);
             }
             else {
-                window.location.href = "/";
+                setDone(true);
             }
         })();
     };
@@ -49,21 +50,22 @@ export default function LoginComponent(){
         <div className={styles['sign-main']}>
             <Link href={"/"}><Image src="/images/HexaLogo.png" alt="" width={100} height={100} /></Link>
             <div className={styles['sign-supporting']}>
-                <h1>Login to Hexacomb</h1>
-                <span>You must be a member of Hexacomb discord.</span>
+                <h1>{done ? "Recovery Link Sent!" : "Update your password"}</h1>
+                <span>{done ? "We just sent a recovery link to your discord via DM." : "Enter a new password and hit the confirm button"}</span>
             </div>
-            <div className={styles['input-row']}>
-                <h5>Username</h5>
-                <input type="text" name="username" placeholder="Username" value={username} onChange={handleChange} />
-            </div>
-            <div className={styles['input-row']}>
-                <h5>Password</h5>
-                <input type="password" name="password" placeholder="Password" value={password} onChange={handleChange} />
-                <p className={styles['login']}><Link href={`/forgot${username !== "" ? "?username=" + username : ""}`}><button>Forgot Password?</button></Link></p>
-            </div>
-            <p>{error}</p>
-            <button className="default-button bigger" onClick={handleSubmit}>Login</button>
-            <p className={styles['login']}>Don&apos;t have an account? <Link href={"/signup"}><button>Sign Up</button></Link></p>
+            {!done &&
+            <>
+                <div className={styles['input-row']}>
+                    <h5>New Password</h5>
+                    <input type="password" name="password" placeholder="Username" value={username} onChange={handleChange} />
+                </div>
+                <div className={styles['input-row']}>
+                    <h5>Confirm New Password</h5>
+                    <input type="password" name="password" placeholder="Username" value={username} onChange={handleChange} />
+                </div>
+                <p>{error}</p>
+                <button className="default-button bigger" onClick={handleSubmit}>Confirm Changes</button>
+            </>}
         </div>
     )
 }

@@ -1,8 +1,12 @@
 package com.example.todoapp.service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.todoapp.model.SignResponse;
 import com.example.todoapp.model.User;
 import com.example.todoapp.model.UserResponse;
 import com.example.todoapp.repository.UserRepository;
@@ -24,7 +28,13 @@ public class UserService {
     }
 
     public User getUserByUsername(String username){
-        return userRepository.findUserByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+        Optional<User> userOptional = userRepository.findUserByUsername(username);
+        if(userOptional.isPresent()){
+            return userOptional.get();
+        }
+        else{
+            return null;
+        }
     }
 
     public UserResponse changeCode(User user, String code){
@@ -51,5 +61,15 @@ public class UserService {
                     .message("Wrong code")
                     .build();
         }
+    }
+
+    public SignResponse setRecoveryCode(User user, String code){
+        user.setResetPasswordToken(UUID.fromString(code));
+        userRepository.save(user);
+        return SignResponse
+                .builder()
+                .message("Recovery code set")
+                .success(true)
+                .build();
     }
 }
