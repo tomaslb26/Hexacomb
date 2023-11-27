@@ -15,7 +15,7 @@ export default function ResetComponent(props: {username?: string, recoveryToken?
     const [error, setError] = useState<string | null>();
 
     const router = useRouter();
-    const [done, setDone] = useState(true);
+    const [done, setDone] = useState(false);
 
     const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
