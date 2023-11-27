@@ -73,6 +73,25 @@
     }
 }
 
+.admin-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.admin-buttons>button{
+    width: 100%;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Inter-Variable";
+    padding: 8px;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 768px) {
 
 }

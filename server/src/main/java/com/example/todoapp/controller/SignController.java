@@ -70,7 +70,7 @@ public class SignController {
         for (net.dv8tion.jda.api.entities.Role roleMember : member.getRoles()) {
             String roleName = roleMember.getName().toLowerCase();
 
-            if(roleName.equals("pre-whitelisted")){
+            if(roleName.equals("pre-whitelisted") || roleName.equals("muted")){
                 return null;
             }
             

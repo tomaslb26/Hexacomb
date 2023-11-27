@@ -5,12 +5,23 @@ import getUser from "../../helpers/getUser";
 import Main from "@/components/AboutUs/Main";
 import Recap from "@/components/Recap/Recap";
 import PlayersStats from "@/components/Stats/Players/PlayersStats";
+import { deleteCookies } from "@/app/page";
+import { redirect } from "next/navigation";
 
 async function getData(){
   const token = cookies().get("token")?.value;
   let user = undefined;
   if(token){
     user = await getUser(token);
+  }
+
+  if(user && !user.verified){
+    redirect("/2fa");
+  }
+
+  if(user === undefined){
+    deleteCookies();
+    return undefined;
   }
   return user;
 }

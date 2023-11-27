@@ -10,7 +10,7 @@ import Layout from '@/components/Layout/Layout';
 
 async function getData(){
   const token = cookies().get("token")?.value;
-  let user : User | null = null;
+  let user : User | undefined = undefined;
   if(token){
     user = await getUser(token);
   }
@@ -19,7 +19,7 @@ async function getData(){
     redirect("/");
   }
   else if(
-    user.isVerified
+    user.verified
   ){
     redirect("/");
   }

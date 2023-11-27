@@ -107,6 +107,7 @@ export const mcObjects = [
     "Blue Wall Banner",
     "Blue Wool",
     "Bone Block",
+    "Bone Meal",
     "Bookshelf",
     "Brain Coral",
     "Brain Coral Block",

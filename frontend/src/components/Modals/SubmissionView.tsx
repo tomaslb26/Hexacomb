@@ -35,6 +35,11 @@ const SubmissionView = forwardRef<HTMLDivElement, {
                     <h2>Player: {submission?.mcName}</h2>
                 </div>
                 <p>{submission?.description}</p>
+                <div className={styles['coords']}>
+                        <p>X: <span style={{color: "var(--primary-color)", fontWeight: 400}}>{submission?.x}</span></p>
+                        <p>Y: <span style={{color: "var(--primary-color)", fontWeight: 400}}>{submission?.y}</span></p>
+                        <p>Z: <span style={{color: "var(--primary-color)", fontWeight: 400}}>{submission?.z}</span></p>
+                </div>
                 <div className={styles['items']}>
                     {submission?.items.map((item, index) => {
                         return (

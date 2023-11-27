@@ -255,22 +255,25 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                     <div className={styles['coords-row']}>
                         <div className={styles['input-row']}>
                             <label htmlFor="x">X</label>
-                            <input maxLength={6} {...register("x", {required: true})} aria-invalid={errors.x ? "true" : "false"} />
+                            <input maxLength={6} {...register("x", {required: true, valueAsNumber: true})} aria-invalid={errors.x ? "true" : "false"} type="number" />
                             {errors.x?.type === "required" && (
                                 <p role="alert">X is required</p>
+                            )}
+                            {errors.x?.type === "valueAsNumber" && (
+                                <p role="alert">X is not a number</p>
                             )}
                         </div>
                         <div className={styles['input-row']}>
                             <label htmlFor="y">Y</label>
-                            <input  maxLength={6} {...register("y", {required: true})} aria-invalid={errors.y ? "true" : "false"} />
+                            <input  maxLength={6} {...register("y", {required: true, valueAsNumber: true})} aria-invalid={errors.y ? "true" : "false"} type="number" />
                             {errors.y?.type === "required" && (
                                 <p role="alert">Y is required</p>
                             )}
                         </div>
                         <div className={styles['input-row']}>
                             <label htmlFor="z">Z</label>
-                            <input maxLength={6} {...register("z", {required: true})} aria-invalid={errors.z ? "true" : "false"} />
-                            {errors.x?.type === "required" && (
+                            <input maxLength={6} {...register("z", {required: true, valueAsNumber: true})} aria-invalid={errors.z ? "true" : "false"} type="number" />
+                            {errors.z?.type === "required" && (
                                 <p role="alert">Z is required</p>
                             )}
                         </div>

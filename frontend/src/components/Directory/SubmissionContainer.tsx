@@ -4,6 +4,7 @@ import Image from "next/image";
 import { BiExpandAlt } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
 import { useState } from "react";
+import capitalizeWords from "@/utils/capitalizeWords";
 
 
 
@@ -12,11 +13,13 @@ export default function SubmissionContainer(
     props:{
         submission: Submission,
         onClick?: () => void,
-        isEdit?: boolean
+        isEdit?: boolean,
+        isAdmin?: boolean,
+        onChange?: (value: 'ACCEPTED' | 'REJECTED') => void
     }
 ){
 
-    const {isEdit} = props;
+    const {isEdit, isAdmin} = props;
     const [isSaving, setIsSaving] = useState(false);
 
     function deleteSubmission(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
@@ -49,6 +52,9 @@ export default function SubmissionContainer(
         })();
     }
 
+    const color = props.submission.status === "ACCEPTED" ? "var(--success-500)" : props.submission.status === "REJECTED" ? "red" : "yellow";
+    const label = props.submission.status === "ACCEPTED" ? "Accepted" : props.submission.status === "REJECTED" ? "Rejected" : "Pending Approval";
+
     return(
         <div onClick={() => {
             if(props.onClick) props.onClick()
@@ -59,7 +65,13 @@ export default function SubmissionContainer(
             </div>
             <Image src={props.submission.images[0]} width={1000} height={1000} alt="" quality={100}/>
             <button  className={styles['expand']}>{props.isEdit ? <FiEdit /> : <BiExpandAlt />}</button>
-            {isEdit && <button onClick={deleteSubmission} className="default-button delete" style={{width: "100%"}}>
+            {(isEdit || isAdmin) &&
+            <div className={styles['done']}>
+                <p style={{color: color}}>Status: {label}</p>
+            </div>
+            }
+            {isEdit && 
+            <button onClick={deleteSubmission} className="default-button delete" style={{width: "100%"}}>
                 {
                     isSaving ? 
                     <>
@@ -68,6 +80,19 @@ export default function SubmissionContainer(
                     </> : "Delete"
                 }
             </button>}
+            {isAdmin &&
+            <div className={styles['admin-buttons']}>
+                <button onClick={(event: React.MouseEvent<HTMLElement>) => {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    props.onChange && props.onChange("ACCEPTED");
+                }} style={{background: "var(--success-500)"}}>Approve</button>
+                <button onClick={(event: React.MouseEvent<HTMLElement>) => {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    props.onChange && props.onChange("REJECTED");
+                }} style={{background: "var(--error-600)"}}>Reject</button>
+            </div>}
         </div>
     )
 }

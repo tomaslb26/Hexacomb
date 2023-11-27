@@ -48,5 +48,5 @@ public class Submission {
     private SubmissionType type;
     @Enumerated
     private SubmissionStatus status;
-    private LocalDate createdAt;
+    private String createdAt;
 }

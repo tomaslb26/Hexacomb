@@ -45,6 +45,15 @@ public class SignService {
                     .build();
         }
 
+        Optional<User> userOptional2 = userRepository.findUserByDiscordId(discordId);
+        if(userOptional2.isPresent()){
+            return SignResponse
+                    .builder()
+                    .message("Discord account already linked to another user")
+                    .success(false)
+                    .build();
+        }
+
         User user = new User(request.getUsername(), encodedPassword, request.getDiscord(), verificationCode, role, discordId, avatarUrl);
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

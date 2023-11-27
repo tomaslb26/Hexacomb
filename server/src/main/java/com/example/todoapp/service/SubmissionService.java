@@ -1,6 +1,9 @@
 package com.example.todoapp.service;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -45,7 +48,7 @@ public class SubmissionService {
             .type(type)
             .userId(user.getId())
             .status(status)
-            .createdAt(LocalDate.now())
+            .createdAt(Long.toString(Instant.now().getEpochSecond()))
             .build();
 
         submissionRepository.save(submission);

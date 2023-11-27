@@ -36,6 +36,10 @@ async function getData(){
     deleteCookies();
   }
 
+  if(!user){
+    redirect("/");
+  }
+
   let submissions = undefined;
 
   if(user){

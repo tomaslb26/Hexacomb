@@ -68,6 +68,7 @@
 .user-dropdown{
     position: absolute;
     top: 60px;
+    right: 0;
     background: #2D2937;
     border-radius: 8px;
     border: 1px solid var(--success-500);

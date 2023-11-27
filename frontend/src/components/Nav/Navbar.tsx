@@ -18,6 +18,8 @@ import Folder from "../SVG/Folder";
 import Recap from "../Recap/Recap";
 import { RxCaretDown, RxCross2 } from "react-icons/rx";
 import { LuFolderSearch2 } from "react-icons/lu";
+import { MdAdminPanelSettings } from "react-icons/md";
+
 
 
 export default function Navbar(props: {user?: User}) {
@@ -39,7 +41,7 @@ export default function Navbar(props: {user?: User}) {
 
     return(
         <nav className={styles['navbar']}>
-            <Image src="/images/HexaLogo.png" alt="Hexa Logo" width={50} height={50} />
+            <Link href={"/"}><Image src="/images/HexaLogo.png" alt="Hexa Logo" width={50} height={50} /></Link>
             <div className={styles['nav-buttons']}>
                 <Link className={`${pathname === "/" ? styles['selected'] : ""}`} href="/">Home <Home /> </Link>
                 <div className={styles['dropdown']}>
@@ -80,11 +82,12 @@ export default function Navbar(props: {user?: User}) {
                 <Link href={"/sign"}><button className="default-button">Get Started</button></Link>
                 :
                 <div className={styles['user-profile']}>
-                    <Image onClick={() => setToggle((prev) => !prev)} src={user.avatarUrl} alt="User Avatar" width={48} height={48} />
+                    <Image onClick={() => setToggle((prev) => !prev)} src={user.avatarUrl !== null ? user.avatarUrl : "/images/Steve.png"} alt="User Avatar" width={48} height={48} />
                     {toggle &&
                     <div className={styles['user-dropdown']}>
                         <Link href={"/directory?new=true"}><button><FaPlus /> New Submission</button></Link>
                         <Link href={`/profile/submissions`}><button><LuFolderSearch2 /> Your Submissions</button></Link>
+                        {user.role === "ADMIN" && <Link href={"/admin"}><button><MdAdminPanelSettings /> Admin Panel</button></Link>}
                         <button onClick={handleLogout} ><PiSignOutBold /> Logout</button>
                     </div>}
                 </div>
@@ -98,7 +101,7 @@ export default function Navbar(props: {user?: User}) {
                 </div>
                 :
                 <div className={styles['user-profile']}>
-                    <Image onClick={() => setMobileToggle((prev) => !prev)} src={user.avatarUrl} alt="User Avatar" width={48} height={48} />
+                    <Image onClick={() => setMobileToggle((prev) => !prev)} src={user.avatarUrl !== null ? user.avatarUrl : "/images/Steve.png"} alt="User Avatar" width={48} height={48} />
                 </div>
                 }
                 {mobileToggle &&
@@ -117,6 +120,7 @@ export default function Navbar(props: {user?: User}) {
                         <div className="divider" />
                         {user && <div className={styles['slide-buttons']}>
                             <Link className={`${pathname === "/profile/submissions" ? styles['selected-slide'] : ""} ${styles['slide-button']}`} href="/profile/submissions"><LuFolderSearch2 /> Your Submissions</Link>
+                            {user.role === "ADMIN" && <Link className={`${pathname === "/admin" ? styles['selected-slide'] : ""} ${styles['slide-button']}`} href="/admin"><MdAdminPanelSettings /> Admin Panel</Link>}
                         </div>}
                         {user && <div className="divider" />}
                         {!user ?

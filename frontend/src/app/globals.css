@@ -67,6 +67,7 @@ a {
 :root{
   --success-500: #12B76A;
   --error-600: #d92d20;
+  --primary-color: #f0ad2c;
 }
 
 .default-button{
