@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export default async function getSubmissionsByUser(username: string){
 
 
-    const res = await fetch("/get_submissions", {
+    const res = await fetch(process.env.LOCAL_URL + "/get_submissions", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

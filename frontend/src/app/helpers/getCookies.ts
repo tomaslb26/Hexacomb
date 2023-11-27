@@ -1,8 +1,7 @@
 import Cookies from "js-cookie";
 
 export default async function getCookies(token : string) {
-    console.log("SHOUTING");
-    const res = await fetch("/api/demo", {
+    const res = await fetch(process.env.LOCAL_URL + "/api/demo", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

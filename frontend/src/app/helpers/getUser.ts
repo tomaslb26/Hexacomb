@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export default async function getUser(token: string){
 
 
-    const res = await fetch("/api/get_user", {
+    const res = await fetch(process.env.LOCAL_URL + "/api/get_user", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

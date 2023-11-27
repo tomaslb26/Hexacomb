@@ -3,6 +3,7 @@ const nextConfig = {
   env: {
     CDN_ID: process.env.CDN_ID,
     BACKEND_URL: process.env.BACKEND_URL,
+    LOCAL_URL: process.env.LOCAL_URL,
   },
   images: {
       remotePatterns: [

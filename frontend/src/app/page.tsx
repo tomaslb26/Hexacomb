@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 import deleteCookies from "./helpers/deleteCookies";
 
 async function getData(){
-  try{
     let token = undefined;
     if(cookies().get("token")){
       token = cookies().get("token")?.value;
@@ -16,14 +15,10 @@ async function getData(){
 
 
     let user = undefined;
-    try{
-      if(token){
-        user = await getUser(token);
-      }
-    }catch(e){
-      console.log(e);
-      return undefined;
+    if(token){
+      user = await getUser(token);
     }
+    
 
     if(user && !user.verified){
       redirect("/2fa");
@@ -34,21 +29,11 @@ async function getData(){
       return undefined;
     }
     return user;
-  }catch(e){
-    console.log(e);
-    return undefined;
-  }
 }
 
 
 export default async function Home() {
-  let user = undefined;
-  try{
-    user = await getData();
-  }catch(e){
-    console.log(e);
-    user = undefined;
-  }
+  const user = await getData();
 
   return (
       <Layout user={user}>
