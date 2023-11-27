@@ -97,7 +97,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
         };
 
         (async() => {
-            const res = await fetch(props.submission ? `/api/update_submission` : "/api/create_submission", {
+            const res = await fetch(props.submission ? process.env.LOCAL_URL + `/api/update_submission` : process.env.LOCAL_URL + "/api/create_submission", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

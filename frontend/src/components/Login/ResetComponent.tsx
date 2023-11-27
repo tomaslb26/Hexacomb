@@ -33,7 +33,7 @@ export default function ResetComponent(props: {username?: string, recoveryToken?
         }
 
         (async() => {
-            const res = await fetch("/api/reset_password", {
+            const res = await fetch(process.env.LOCAL_URL + "/api/reset_password", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

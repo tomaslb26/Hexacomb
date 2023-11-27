@@ -35,7 +35,7 @@ export default function Admin(props: {
         setSaving(true);
         for(const submission of filteredSubmissions as Submission[]){
             (async() => {
-                const res = await fetch("/api/update_submission", {
+                const res = await fetch(process.env.LOCAL_URL + "/api/update_submission", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

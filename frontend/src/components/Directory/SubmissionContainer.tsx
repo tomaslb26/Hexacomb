@@ -30,7 +30,7 @@ export default function SubmissionContainer(
         setIsSaving(true);
 
         (async() => {
-            const res = await fetch("/api/delete_submission", {
+            const res = await fetch(process.env.LOCAL_URL + "/api/delete_submission", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

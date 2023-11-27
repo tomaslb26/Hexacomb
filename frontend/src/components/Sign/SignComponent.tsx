@@ -38,7 +38,7 @@ export default function SignComponent(){
 
 
         (async() => {
-            const res = await fetch("/api/register", {
+            const res = await fetch(process.env.LOCAL_URL + "/api/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

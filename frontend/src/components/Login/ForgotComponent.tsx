@@ -23,7 +23,7 @@ export default function ForgotComponent(props: {username?: string}){
 
     function handleSubmit(){
         (async() => {
-            const res = await fetch("/api/forgot", {
+            const res = await fetch(process.env.LOCAL_URL + "/api/forgot", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
