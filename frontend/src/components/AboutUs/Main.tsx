@@ -14,6 +14,7 @@ export default function Main(){
                 <h2>Current Season</h2>
                 <h1>Thrive in group, complete all the objectives and unleash the ages upon us.</h1>
                 <p>Season 4 of Hexacomb began on October 1st 2023. In this new season we will try and slow down the progression of the server by advancing through different ages on the server. In order to advance through the Ages we will have to meet goals as a community to open up the world border and the dimensions in Minecraft.</p>
+                <embed className={styles['map']} src="https://bluemap.hexacomb.net/" />
             </div>
             <div className={styles['main-heading']}>
                 <h2>Server Information</h2>
