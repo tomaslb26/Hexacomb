@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.todoapp.config.DiscordBotConfig;
 import com.example.todoapp.model.User;
 import com.example.todoapp.model.Request.SubmissionRequest;
 import com.example.todoapp.model.Response.SubmissionResponse;
 import com.example.todoapp.service.SubmissionService;
 import com.example.todoapp.service.UserService;
+
+import net.dv8tion.jda.api.entities.Member;
 
 @RestController
 @RequestMapping("/api/v1/submission")
@@ -28,11 +31,19 @@ public class SubmissionController {
 
     private SubmissionService submissionService;
     private UserService userService;
+    private DiscordBotConfig discordBotConfig;
 
     @Autowired
-    public SubmissionController(SubmissionService submissionService, UserService userService) {
+    public SubmissionController(SubmissionService submissionService, UserService userService, DiscordBotConfig discordBotConfig) {
         this.submissionService = submissionService;
         this.userService = userService;
+        this.discordBotConfig = discordBotConfig;
+    }
+
+    public void postSubmission(User user){
+        Member isInServer = discordBotConfig.isUserInServer(user.getDiscord()).join();
+        System.out.println("User: " + user.getUsername() + " has just created a new submission!");
+        discordBotConfig.PostSubmission("User: " + isInServer.getUser().getAsMention() + " has just created a new submission!");
     }
     
     @PostMapping("/create")
@@ -43,6 +54,7 @@ public class SubmissionController {
 
         User user = userService.getUser(bearerToken.split("Bearer ")[1]);
         SubmissionResponse response = submissionService.createSubmission(user, submission);
+        if(response.isSuccess()) postSubmission(user);
 
         return ResponseEntity.ok(response);
     }

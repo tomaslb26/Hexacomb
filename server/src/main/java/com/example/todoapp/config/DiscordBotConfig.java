@@ -91,5 +91,10 @@ public class DiscordBotConfig {
         guild.getTextChannelById("1174772174414958612").sendMessage(message).queue();
     }
 
+    public void PostSubmission(String message) {
+        Guild guild = jda.getGuildById("803135919792193537");
+        guild.getTextChannelById("1178785846552436798").sendMessage(message).queue();
+    }
+
 
 }
