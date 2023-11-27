@@ -3,7 +3,6 @@ const nextConfig = {
   env: {
     CDN_ID: process.env.CDN_ID,
     BACKEND_URL: process.env.BACKEND_URL,
-    LOCAL_URL: process.env.LOCAL_URL,
   },
   images: {
       remotePatterns: [
@@ -12,19 +11,6 @@ const nextConfig = {
           hostname: "**",
         },
       ],
-    },
-    async headers() {
-      return [
-        {
-          source: '/(.*)',
-          headers: [
-            {
-              key: 'Content-Security-Policy',
-              value: "script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self';",
-            },
-          ],
-        },
-      ];
     },
   };
 
