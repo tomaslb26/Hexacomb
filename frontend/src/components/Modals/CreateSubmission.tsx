@@ -9,7 +9,7 @@ import Dropdown from "../Reusable/Dropdown";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import Axios from "axios";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { uploadPhoto } from "@/utils/uploadPhoto";
 import { usePathname } from "next/navigation";
 
@@ -57,9 +57,9 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                 type: "SHOP",
                 items: [],
                 mcName: "",
-                x: "",
-                y: "",
-                z: "",
+                x: 0,
+                y: 0,
+                z: 0,
                 images: []
             
             });
@@ -67,9 +67,14 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
         }
     }, [props.submission, reset])
 
-    const onSubmit = handleSubmit(async (data) => {
+    const onSubmit: SubmitHandler<Submission> = async (data) => {
         if(uploaded.length === 0){
             setError("You must upload at least one image.");
+            return;
+        }
+
+        if(data.x === 0 || data.y === 0 || data.z === 0){
+            setError("You must enter valid coordinates.");
             return;
         }
 
@@ -111,7 +116,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                 pathname === "/directory" ? window.location.href = "/directory" : window.location.reload();
             }
         })();
-    })
+    }
 
     function handleClose(){
         if (typeof ref === 'function') {
@@ -125,9 +130,9 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                 type: "SHOP",
                 items: [],
                 mcName: "",
-                x: "",
-                y: "",
-                z: "",
+                x: 0,
+                y: 0,
+                z: 0,
                 images: []
             
             });
@@ -282,7 +287,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                         gap: "1rem"
                     }}>
                         <h6>Images</h6>
-                        {uploaded.length <= 3 &&
+                        {uploaded.length < 3 &&
                         <>
                             <label className={styles['image-upload']} htmlFor="image-upload">
                                 <h6>CHOOSE FILE</h6>
@@ -290,7 +295,10 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                             <input onChange={(event: ChangeEvent<HTMLInputElement>) => {
                                 if(event.target.files && event.target.files.length > 0 && event.target.files.length + uploaded.length <= 3){
                                     setUploaded((prev) => {
-                                        return [...prev, ...Array.from(event.target.files)];
+                                        let newFiles: File[] = [];
+                                        if(event.target.files) newFiles = Array.from(event.target.files);
+                                        else return prev;
+                                        return [...prev, newFiles[0]];
                                     })
                                 }
                             }} type="file" name="image-upload" id="image-upload" style={{display: "none"}} />

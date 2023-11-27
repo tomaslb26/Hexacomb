@@ -5,7 +5,6 @@ import getUser from "../../helpers/getUser";
 import Main from "@/components/AboutUs/Main";
 import Recap from "@/components/Recap/Recap";
 import PlayersStats from "@/components/Stats/Players/PlayersStats";
-import { deleteCookies } from "@/app/page";
 import { redirect } from "next/navigation";
 
 async function getData(){
@@ -24,6 +23,11 @@ async function getData(){
     return undefined;
   }
   return user;
+}
+
+async function deleteCookies(){
+  "use server";
+  cookies().delete("token");
 }
 
 export default async function Home() {

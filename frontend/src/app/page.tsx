@@ -25,7 +25,7 @@ async function getData(){
   return user;
 }
 
-export async function deleteCookies(){
+async function deleteCookies(){
   "use server";
   cookies().delete("token");
 }

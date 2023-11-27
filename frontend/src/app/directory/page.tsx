@@ -3,7 +3,6 @@ import Layout from "@/components/Layout/Layout";
 import { cookies } from "next/headers";
 import getUser from "../helpers/getUser";
 import { redirect } from "next/navigation";
-import { deleteCookies } from "../page";
 import CreateSubmission from "@/components/Modals/CreateSubmission";
 import MainDirectory from "@/components/Directory/MainDirectory";
 import getSubmissions from "../helpers/getSubmissions";
@@ -41,6 +40,11 @@ async function getData(){
     user: user,
     submissions: submissions?.filter(submission => submission.status === "ACCEPTED")
   }
+}
+
+async function deleteCookies(){
+  "use server";
+  cookies().delete("token");
 }
 
 export default async function Home({

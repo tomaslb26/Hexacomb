@@ -1,4 +1,4 @@
-export default function capitalizeWords(sentence) {
+export default function capitalizeWords(sentence : string) {
     // Split the sentence into words
     let words = sentence.split(' ');
 

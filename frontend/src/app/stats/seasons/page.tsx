@@ -6,7 +6,6 @@ import Main from "@/components/AboutUs/Main";
 import Recap from "@/components/Recap/Recap";
 import SeasonStats from "@/components/Stats/Season/SeasonStats";
 import { redirect } from "next/navigation";
-import { deleteCookies } from "@/app/page";
 
 async function getData(){
   const token = cookies().get("token")?.value;
@@ -26,12 +25,17 @@ async function getData(){
   return user;
 }
 
+async function deleteCookies(){
+  "use server";
+  cookies().delete("token");
+}
+
 export default async function Home() {
 
   const user = await getData();
 
   return (
-    <Layout user={user}>
+    <Layout deleteCookies={deleteCookies} user={user}>
         <SeasonStats />
     </Layout>
   )

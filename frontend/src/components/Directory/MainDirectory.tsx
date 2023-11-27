@@ -90,7 +90,7 @@ export default function MainDirectory(props: {
                 }} className="default-button"><HiPlus /> Create Submission</button>
                 <Link href={"/profile/submissions"}><button className="default-button"><Folder /> See Submissions</button></Link>
                 </div>}
-                {submissions?.length > 0 
+                {submissions && submissions?.length > 0 
                 &&
                 <>
                     <input onChange={

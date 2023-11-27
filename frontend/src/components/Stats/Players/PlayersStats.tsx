@@ -16,11 +16,12 @@ function PlayerImage(props: {player: string}) {
 
     const defaultImage = "/images/Heads/blond996.jpg"; // The path to your default image in the public folder
 
-    const handleError = (e) => {
-        if (e.target.src !== defaultImage) { // Prevents infinite loop in case the default image is also missing
-            e.target.onerror = null; // Remove the error handler to prevent it from being called again
-            e.target.src = defaultImage; // Set to default image
-        }
+    const handleError = (e : React.SyntheticEvent<HTMLImageElement, Event>) => {
+        if ((e.target as HTMLImageElement).src !== defaultImage) {
+            // Prevents infinite loop in case the default image is also missing
+            e.currentTarget.onerror = null; // Remove the error handler to prevent it from being called again
+            e.currentTarget.src = defaultImage; // Set to the default image
+          }
     };
 
     return (
@@ -65,7 +66,9 @@ export default function PlayersStats(){
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isLoadingSeason, setIsLoadingSeason] = useState<boolean>(true);
     const [data, setData] = useState<{
-        custom: object,
+        custom: {
+            [key: string]: string
+        },
         killed: object,
         mined: object,
         crafted: object,

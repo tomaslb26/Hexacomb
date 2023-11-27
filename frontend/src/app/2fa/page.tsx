@@ -1,4 +1,3 @@
-import DemoComponent from '@/components/DemoComponent';
 import getCookies from '../helpers/getCookies';
 import styles from './../page.module.css'
 import {cookies} from "next/headers";
