@@ -13,6 +13,7 @@ import ProfileSubmissions from "@/components/Profile/ProfileSubmissions";
 import Tabs from "@/components/Profile/Tabs";
 import getSubmissions from "@/app/helpers/getSubmissions";
 import Admin from "@/components/AdminPanel/Admin";
+import deleteCookies from "../helpers/deleteCookies";
 
 interface Props {
   user : User | undefined,
@@ -58,17 +59,12 @@ async function getData(){
   }
 }
 
-async function deleteCookies(){
-  "use server";
-  cookies().delete("token");
-}
-
 export default async function Home() {
 
   const data : Props = await getData();
 
   return (
-      <Layout deleteCookies={deleteCookies} user={data.user}>
+      <Layout user={data.user}>
         <Admin user={data.user} submissions={data.submissions} />
       </Layout>
   )

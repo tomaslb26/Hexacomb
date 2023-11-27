@@ -9,6 +9,7 @@ import getSubmissions from "../helpers/getSubmissions";
 import { Submission } from "@/types/submission";
 import { User } from "@/types/user";
 import { createContext } from "react";
+import deleteCookies from "../helpers/deleteCookies";
 
 interface Props {
   user : User | undefined,
@@ -42,11 +43,6 @@ async function getData(){
   }
 }
 
-async function deleteCookies(){
-  "use server";
-  cookies().delete("token");
-}
-
 export default async function Home({
   params,
   searchParams,
@@ -58,7 +54,7 @@ export default async function Home({
   const data : Props = await getData();
 
   return (
-      <Layout deleteCookies={deleteCookies} user={data.user}>
+      <Layout user={data.user}>
         <MainDirectory isNew={searchParams['new'] ? true : false} submissions={data.submissions ? data.submissions : []} user={data.user} />
       </Layout>
   )

@@ -19,6 +19,7 @@ import Recap from "../Recap/Recap";
 import { RxCaretDown, RxCross2 } from "react-icons/rx";
 import { LuFolderSearch2 } from "react-icons/lu";
 import { MdAdminPanelSettings } from "react-icons/md";
+import deleteCookies from "@/app/helpers/deleteCookies";
 
 
 
@@ -32,8 +33,8 @@ export default function Navbar(props: {user?: User}) {
     const pathname = usePathname();
     const Cookies = useContext(CookiesContext);
 
-    function handleLogout() {
-        Cookies.delete();
+    async function handleLogout() {
+        await deleteCookies();
         router.refresh();
         setMobileToggle(false);
         setToggle(false);

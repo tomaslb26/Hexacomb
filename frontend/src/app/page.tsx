@@ -3,10 +3,15 @@ import Layout from "@/components/Layout/Layout";
 import { cookies } from "next/headers";
 import getUser from "./helpers/getUser";
 import { redirect } from "next/navigation";
+import deleteCookies from "./helpers/deleteCookies";
 
 async function getData(){
   "use server;"
-  const token = cookies().get("token")?.value;
+
+  let token = undefined;
+  if(cookies().get("token")){
+    token = cookies().get("token")?.value;
+  }
 
 
   let user = undefined;
@@ -25,17 +30,14 @@ async function getData(){
   return user;
 }
 
-async function deleteCookies(){
-  "use server";
-  cookies().delete("token");
-}
 
 export default async function Home() {
+
 
   let user = await getData();
 
   return (
-      <Layout deleteCookies={deleteCookies} user={user}>
+      <Layout user={user}>
         <Hero user={user} />
       </Layout>
   )

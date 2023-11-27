@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import getUser from "../helpers/getUser";
 import Main from "@/components/AboutUs/Main";
 import { redirect } from "next/navigation";
+import deleteCookies from "../helpers/deleteCookies";
 
 async function getData(){
   const token = cookies().get("token")?.value;
@@ -23,17 +24,13 @@ async function getData(){
   return user;
 }
 
-async function deleteCookies(){
-  "use server";
-  cookies().delete("token");
-}
 
 export default async function Home() {
 
   const user = await getData();
 
   return (
-    <Layout deleteCookies={deleteCookies} user={user}>
+    <Layout user={user}>
       <Main />
     </Layout>
   )

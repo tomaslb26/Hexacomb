@@ -11,6 +11,7 @@ import { createContext } from "react";
 import getSubmissionsByUser from "@/app/helpers/getSubmissionsByUser";
 import ProfileSubmissions from "@/components/Profile/ProfileSubmissions";
 import Tabs from "@/components/Profile/Tabs";
+import deleteCookies from "@/app/helpers/deleteCookies";
 
 interface Props {
   user : User | undefined,
@@ -52,17 +53,12 @@ async function getData(){
   }
 }
 
-async function deleteCookies(){
-  "use server";
-  cookies().delete("token");
-}
-
 export default async function Home() {
 
   const data : Props = await getData();
 
   return (
-      <Layout deleteCookies={deleteCookies} user={data.user}>
+      <Layout user={data.user}>
         <Tabs />
         <ProfileSubmissions user={data.user} submissions={data.submissions} />
       </Layout>

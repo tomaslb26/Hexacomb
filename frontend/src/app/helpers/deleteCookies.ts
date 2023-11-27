@@ -1,6 +1,10 @@
 import { cookies } from "next/headers";
 
 export default async function deleteCookies(){
-    "use server";
-    cookies().delete("token");
+    await fetch("http://localhost:3000/api/logout", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+      });
 }
