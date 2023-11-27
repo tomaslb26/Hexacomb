@@ -18,6 +18,10 @@ export default function Staff(){
                         <p>Ferrno</p>
                     </div>
                     <div className={styles['staff']}>
+                        <Image src={"/images/LandingPage/Staff/Hardy.png"} alt="" width={60} height={60} />
+                        <p>Hardy</p>
+                    </div>
+                    <div className={styles['staff']}>
                         <Image src={"/images/LandingPage/Staff/NevQ.png"} alt="" width={60} height={60} />
                         <p>NevQ</p>
                     </div>
@@ -40,12 +44,12 @@ export default function Staff(){
                         <p>Fabian</p>
                     </div>
                     <div className={styles['staff']}>
-                        <Image src={"/images/LandingPage/Staff/Hardy.png"} alt="" width={60} height={60} />
-                        <p>Hardy</p>
-                    </div>
-                    <div className={styles['staff']}>
                         <Image src={"/images/LandingPage/Staff/MiniMichiii.jpg"} alt="" width={60} height={60} />
                         <p>MiniMichii</p>
+                    </div>
+                    <div className={styles['staff']}>
+                        <Image src={"/images/LandingPage/Staff/Pix.jpg"} alt="" width={60} height={60} />
+                        <p>Pix</p>
                     </div>
                     <div className={styles['staff']}>
                         <Image src={"/images/LandingPage/Staff/Titanicus.png"} alt="" width={60} height={60} />
