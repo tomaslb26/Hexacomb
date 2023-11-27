@@ -15,8 +15,13 @@ async function getData(){
 
 
   let user = undefined;
-  if(token){
-    user = await getUser(token);
+  try{
+    if(token){
+      user = await getUser(token);
+    }
+  }catch(e){
+    console.log(e);
+    return undefined;
   }
 
   if(user && !user.verified){
