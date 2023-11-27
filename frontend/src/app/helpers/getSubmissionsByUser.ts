@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export default async function getSubmissionsByUser(username: string){
 
 
-    const res = await fetch("http://localhost:3000/api/get_submissions", {
+    const res = await fetch("/get_submissions", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
