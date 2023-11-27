@@ -1,9 +1,10 @@
 import { Submission } from "@/types/submission";
+import fetchPonyfill from "fetch-ponyfill";
 import { NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
 export default async function getSubmissionsByUser(username: string){
-    const res = await fetch(process.env.LOCAL_URL + "/api/get_submissions", {
+    const res = await fetchPonyfill().fetch(process.env.LOCAL_URL + "/api/get_submissions", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

@@ -1,10 +1,11 @@
 import { NextApiResponse } from "next";
 import { NextResponse } from "next/server";
+import fetchPonyfill from "fetch-ponyfill";
 
 export default async function getUser(token: string){
 
 
-    const res = await fetch(process.env.LOCAL_URL + "/api/get_user", {
+    const res = await fetchPonyfill().fetch(process.env.LOCAL_URL + "/api/get_user", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
