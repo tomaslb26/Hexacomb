@@ -42,9 +42,13 @@ async function getData(){
 
 
 export default async function Home() {
-
-
-  let user = await getData();
+  let user = undefined;
+  try{
+    user = await getData();
+  }catch(e){
+    console.log(e);
+    user = undefined;
+  }
 
   return (
       <Layout user={user}>
