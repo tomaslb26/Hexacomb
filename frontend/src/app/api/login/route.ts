@@ -5,6 +5,7 @@ import {cookies} from "next/headers";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const body = await req.json();
+  console.log(`${process.env.BACKEND_URL}api/v1/auth/authenticate`);
   try {
     const apiRes = await fetch(`${process.env.BACKEND_URL}api/v1/auth/authenticate`, {
         method: "POST",

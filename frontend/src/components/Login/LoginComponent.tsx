@@ -34,7 +34,7 @@ export default function LoginComponent(){
                 })
             });
             const dataReceived = await res.json() as {success?: boolean, message: string, token?: string};
-
+            console.log(dataReceived);
             if(!dataReceived.success){
                 setError(dataReceived.message);
             }

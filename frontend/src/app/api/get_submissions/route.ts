@@ -26,7 +26,6 @@ export async function GET(req: NextRequest){
 }
 
 export async function POST(req: NextRequest){
-
     try {
         const body = await req.json();
         // Make a POST request to the demo API with the Bearer token
@@ -36,7 +35,7 @@ export async function POST(req: NextRequest){
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                "username": body.username,
+                username: body.username,
             }),
             cache: "no-store"
         });
