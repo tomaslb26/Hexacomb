@@ -52,6 +52,7 @@
     object-fit: cover;
     border-radius: 12px;
     margin-top: auto;
+    aspect-ratio: 16/9;
 }
 
 .spinner {
