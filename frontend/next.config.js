@@ -6,6 +6,7 @@ const nextConfig = {
     LOCAL_URL: process.env.LOCAL_URL,
   },
   images: {
+    unoptimized: true,
       remotePatterns: [
         {
           protocol: "https",
