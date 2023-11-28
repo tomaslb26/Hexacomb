@@ -54,7 +54,7 @@ export const mcObjects = [
     "Beacon",
     "Bee Nest",
     "Beehive",
-    "Beetroots",
+    "Beetroot",
     "Bell",
     "Big Dripleaf",
     "Big Dripleaf Stem",
@@ -741,6 +741,8 @@ export const mcObjects = [
     "Stripped Warped Stem",
     "Sugar Cane",
     "Sunflower",
+    "Spider Eye",
+    "Tropical Fish",
     "Suspicious Gravel",
     "Suspicious Sand",
     "Sweet Berry Bush",
@@ -891,6 +893,7 @@ export const mcObjects = [
     "Cooked Beef",
     "Cooked Porkchop",
     "Baked Potato",
+    "Potato",
     "Bread",
     "Cake",
     "Cookie",
@@ -914,5 +917,10 @@ export const mcObjects = [
     "Compass",
     "Clock",
     "Ender Pearl",
-    "Cooked Mutton"
+    "Cooked Mutton",
+    "Cooked Chicken",
+    "Beetroot Soup",
+    "Chorus Fruit","Cooked Cod","Cooked Rabbit","Dried Kelp", "Enchanted Golden Apple", "Glow Berries", "Golden Carrot", "Honey Bottle", "Pufferfish",
+    "Beef", "Chicken", "Cod", "Mutton", "Porkchop", "Rabbit", "Salmon", "Rotten Flesh"
+
 ]
