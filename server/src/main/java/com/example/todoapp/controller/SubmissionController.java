@@ -42,7 +42,6 @@ public class SubmissionController {
 
     public void postSubmission(User user){
         Member isInServer = discordBotConfig.isUserInServer(user.getDiscord()).join();
-        System.out.println("User: " + user.getUsername() + " has just created a new submission!");
         discordBotConfig.PostSubmission("User: " + isInServer.getUser().getAsMention() + " has just created a new submission!");
     }
     
