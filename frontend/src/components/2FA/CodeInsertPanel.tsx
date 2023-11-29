@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { set } from "react-hook-form";
 
 export default function CodeInsertPanel(props : {user: User}){
 
@@ -22,29 +23,41 @@ export default function CodeInsertPanel(props : {user: User}){
 
     const router = useRouter();
 
-    function changeValue(e: React.KeyboardEvent<HTMLInputElement>, index: number) {
-        if ((e.key >= '0' && e.key <= '9') || e.key === 'Backspace') {
+    function changeValue(e: React.ChangeEvent<HTMLInputElement>, index: number) {
+        const {value} = e.target;
+        if (isNaN(Number(value))) return;
+        if(Number(value) || value === "") {
           // Allow numeric input and backspace to trigger the change event
-          const newValue = e.key === 'Backspace' ? '' : e.key;
+          const newValue = value;
           const newCode = [...code];
+          console.log(value);
           newCode[index] = newValue;
           setCode(newCode);
       
-          if (e.key === 'Backspace' && index > 0) {
+          if (value === '' && index > 0) {
             // Handle backspace
             inputRefs.current[index - 1]?.focus();
-          } else if (index < numInputs - 1 && e.key !== 'Backspace') {
+          } else if (index < numInputs - 1 && value !== '') {
             inputRefs.current[index + 1]?.focus();
           }
           e.preventDefault(); // Prevent the input value from changing
         }
     }
 
+    function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>, index: number) {
+        if(e.key > '0' && e.key < '9' && code[index] !== ""){
+            const newCode = [...code];
+            newCode[index] = e.key;
+            setCode(newCode);
+            inputRefs.current[index + 1]?.focus();
+        }
+
+
+    }
+
     function verifyCode(e : React.FormEvent<HTMLFormElement>){
         e.preventDefault();
         e.preventDefault();
-
-        console.log(code.join(""));
 
         (async() => {
             const res = await fetch("/api/verify", {
@@ -110,8 +123,11 @@ export default function CodeInsertPanel(props : {user: User}){
                         type="text" 
                         maxLength={1} 
                         className={styles['code-input']}  
-                        onKeyDown={(event : React.KeyboardEvent<HTMLInputElement>) => {
+                        onChange={(event : React.ChangeEvent<HTMLInputElement>) => {
                                 changeValue(event, index);
+                        }}
+                        onKeyDown={(event : React.KeyboardEvent<HTMLInputElement>) => {
+                            handleKeyDown(event, index);
                         }}
                     />
                 ))}
