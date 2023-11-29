@@ -22,8 +22,6 @@ async function getData(){
   ){
     redirect("/");
   }
-
-
   return user;
 }
 
