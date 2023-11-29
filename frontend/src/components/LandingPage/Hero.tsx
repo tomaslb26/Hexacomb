@@ -16,6 +16,7 @@ import Link from "next/link";
 import JoinUs from "../Modals/JoinUs";
 import { User } from "@/types/user";
 import useDisableScrollbar from "@/utils/useDisableScrollbar";
+import WhitelistSubmission from "../Modals/WhitelistSubmission";
 
 export default function Hero(props: {
     user?: User
@@ -28,6 +29,7 @@ export default function Hero(props: {
     useDisableScrollbar(disableScrollbar);
 
     const modalRef = useRef<HTMLDivElement>(null);
+    const whitelistRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if(props.user === undefined && modalRef.current){
@@ -39,6 +41,7 @@ export default function Hero(props: {
 
     return(
         <div className={styles['hero']}>
+            <WhitelistSubmission setDisable={setDisableScrollbar} ref={whitelistRef} />
             <JoinUs setDisable={setDisableScrollbar} ref={modalRef} />
             <div className={styles['hero-wrapper']}>
                 <div className={styles['main-section']}>
