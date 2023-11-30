@@ -6,9 +6,13 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.example.todoapp.service.WhitelistService;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,10 +24,15 @@ public class DiscordBotConfig {
 
     private JDA jda;
 
+    @Autowired
+    private ApplicationContext context;
+
     @Bean
     public JDA discordJDABuilder() throws InterruptedException {
-        JDABuilder jdaBuilder = JDABuilder.createDefault(discordToken).enableIntents(GatewayIntent.GUILD_MEMBERS);
+        JDABuilder jdaBuilder = JDABuilder.createDefault(discordToken).enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT);
         jda = jdaBuilder.build().awaitReady();
+        WhitelistService whitelistService = context.getBean(WhitelistService.class);
+        jda.addEventListener(new CheckForSubmissions(jda, whitelistService));
         return jda;
     }
 
@@ -94,6 +103,11 @@ public class DiscordBotConfig {
     public void PostSubmission(String message) {
         Guild guild = jda.getGuildById("803135919792193537");
         guild.getTextChannelById("1178785846552436798").sendMessage(message).queue();
+    }
+
+    public void PostWhitelistRequest(String message) {
+        Guild guild = jda.getGuildById("803135919792193537");
+        guild.getTextChannelById("1179479860066930799").sendMessage(message).queue();
     }
 
 
