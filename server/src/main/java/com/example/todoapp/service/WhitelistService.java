@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.todoapp.model.WhitelistReq;
 import com.example.todoapp.model.Response.WhitelistResponse;
+import com.example.todoapp.model.WhitelistRequest.WhitelistStatus;
 import com.example.todoapp.repository.UserRepository;
 import com.example.todoapp.repository.WhitelistRepository;
 
@@ -28,6 +29,8 @@ public class WhitelistService {
                     .build();
         }
         else{
+            WhitelistStatus status = WhitelistStatus.PENDING;
+            request.setStatus(status);
             whitelistRepository.save(request);
         }
 
@@ -65,6 +68,15 @@ public class WhitelistService {
         }
         else{
             return null;
+        }
+    }
+
+    public void updateWhitelistRequestById(String discordName, WhitelistStatus status){
+        Optional<WhitelistReq> submission = whitelistRepository.findSubmissionByDiscord(discordName);
+
+        if(submission.isPresent()){
+            submission.get().setStatus(status);
+            whitelistRepository.save(submission.get());
         }
     }
 }
