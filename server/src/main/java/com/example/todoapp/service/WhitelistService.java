@@ -65,7 +65,7 @@ public class WhitelistService {
     public WhitelistReq getWhitelistRequest(String discordName){
         Optional<WhitelistReq> submission = whitelistRepository.findSubmissionByDiscord(discordName);
 
-        if(submission.isPresent()){
+        if(submission.isPresent() && submission.get().getStatus() == WhitelistStatus.PENDING){
             return submission.get();
         }
         else{

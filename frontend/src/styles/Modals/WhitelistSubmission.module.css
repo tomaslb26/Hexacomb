@@ -52,6 +52,10 @@
     gap: 4px;
 }
 
+.input-row>p{
+    color: var(--error-600);
+}
+
 .input-row>label{
     font-size: 20px;
     font-weight: 400;
@@ -75,3 +79,50 @@
     height: 120px;
 }
 
+.upload-photo{
+    background-color: #f0ad2c;
+    width: fit-content;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Inter-Variable";
+    color: rgb(255, 255, 247);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    cursor: pointer;
+}
+
+.photos-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.photo-container{
+    width: 100%;
+    position: relative;
+}
+
+.photo-container>img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.photo-container>button{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    background-color: #2D2937;
+    padding: 4px;
+    border-radius: 4px;
+
+    color: white;
+
+    cursor: pointer;
+}

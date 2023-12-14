@@ -17,6 +17,7 @@ import com.example.todoapp.service.SignService;
 import com.example.todoapp.service.WhitelistService;
 
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 
 @RestController
 @RequestMapping("/api/v1/whitelist")
@@ -64,6 +65,14 @@ public class WhitelistController {
                 if(response.isSuccess()){
                     discordBotConfig.PostWhitelistRequest(isInServer.getUser().getAsMention() + " has just sent a whitelist request! Use !see " + request.getDiscordName() + " to see the request.");
                 }
+
+                User user = isInServer.getUser();
+                if (!user.isBot()) {
+                    // Send a direct message to the user who sent the message
+                    user.openPrivateChannel().queue(privateChannel ->
+                            privateChannel.sendMessage("Your whitelist application was just received by our admins. Thank you.").queue()
+                    );
+                } 
             }
         }
         

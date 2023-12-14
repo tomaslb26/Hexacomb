@@ -126,6 +126,9 @@ public class CheckForSubmissions extends ListenerAdapter {
                 event.getChannel().sendMessage("```" + discordName + "```").queue();
             }
         }
+        else if(event.getChannel().getId().toString().equals("1179479860066930799") && event.getMessage().getContentDisplay().toString().startsWith("!commands")){
+            event.getChannel().sendMessage("```!see <discord username> - See a submission\n!accept <discord username> - Accept a submission\n!deny <discord username> <reason> - Deny a submission\n!list - List all pending submissions```").queue();
+        }
     }
     
 }
