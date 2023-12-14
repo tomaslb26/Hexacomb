@@ -34,7 +34,6 @@ public class WhitelistController {
     public boolean checkIfPreWhitelist(Member discordMember){
         for (net.dv8tion.jda.api.entities.Role roleMember : discordMember.getRoles()) {
             String roleName = roleMember.getName().toLowerCase();
-            System.out.println(roleName);
             if(roleName.equals("pre-whitelisted")){
                 return true;
             }

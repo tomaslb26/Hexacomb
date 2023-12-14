@@ -64,6 +64,14 @@ public class CheckForSubmissions extends ListenerAdapter {
                         event.getGuild().modifyMemberRoles(foundMember,
                         hexacombian, whitelist).queue();
                         event.getChannel().sendMessage("```" + discordUsername + " has been accepted!```").queue();
+
+                        User user = foundMember.getUser();
+                        if (!user.isBot()) {
+                            // Send a direct message to the user who sent the message
+                            user.openPrivateChannel().queue(privateChannel ->
+                                    privateChannel.sendMessage("You just got whitelisted! Welcome to Hexacomb!").queue()
+                            );
+                        }   
                     } else {
                         System.out.println("Member not found!");
                         event.getChannel().sendMessage("```Member not found: " + discordUsername + "```").queue();
@@ -106,6 +114,17 @@ public class CheckForSubmissions extends ListenerAdapter {
             }).onError(error -> {
                 System.out.println("Error loading members: " + error.getMessage());
             });
+        }
+        else if(event.getChannel().getId().toString().equals("1179479860066930799") && event.getMessage().getContentDisplay().toString().startsWith("!list")){
+            List<String> discordNames = whitelistService.getAllWhitelistReqUsers();
+
+            if(discordNames.isEmpty() || discordNames == null){
+                event.getChannel().sendMessage("```No pending submissions```").queue();
+            }
+
+            for(String discordName : discordNames){
+                event.getChannel().sendMessage("```" + discordName + "```").queue();
+            }
         }
     }
     

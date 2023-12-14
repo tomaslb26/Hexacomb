@@ -1,5 +1,7 @@
 package com.example.todoapp.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -77,6 +79,21 @@ public class WhitelistService {
         if(submission.isPresent()){
             submission.get().setStatus(status);
             whitelistRepository.save(submission.get());
+        }
+    }
+
+    public List<String> getAllWhitelistReqUsers(){
+        Optional<List <WhitelistReq>> submissions = whitelistRepository.findPendingSubmissions(WhitelistStatus.PENDING);
+
+        if(submissions.isPresent()){
+            List<String> users = new ArrayList<String>();
+            for(WhitelistReq submission : submissions.get()){
+                users.add(submission.getDiscordName());
+            }
+            return users;
+        }
+        else{
+            return null;
         }
     }
 }
