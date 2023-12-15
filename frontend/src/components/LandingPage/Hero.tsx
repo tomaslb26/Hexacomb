@@ -17,6 +17,7 @@ import JoinUs from "../Modals/JoinUs";
 import { User } from "@/types/user";
 import useDisableScrollbar from "@/utils/useDisableScrollbar";
 import WhitelistSubmission from "../Modals/WhitelistSubmission";
+import { FiSend } from "react-icons/fi";
 
 export default function Hero(props: {
     user?: User
@@ -54,6 +55,12 @@ export default function Hero(props: {
                         <Link href="https://discord.com/invite/yj9vmgSrse">
                             <button className="default-button bigger"><FaDiscord /> Join Us</button>
                         </Link>
+                        {!props.user && <button className="default-button bigger" onClick={() => {
+                            if(whitelistRef.current){
+                                whitelistRef.current.style.display = "flex";
+                                setDisableScrollbar(true);
+                            }
+                        }}><FiSend /> Apply</button>}
                     </div>               
                 </div>
                 <div className={styles['check-section']}>

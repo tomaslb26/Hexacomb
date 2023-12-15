@@ -9,6 +9,7 @@ import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import { uploadPhoto } from "@/utils/uploadPhoto";
 import { IoMdCheckboxOutline } from "react-icons/io";
+import { FaRegCircleCheck } from "react-icons/fa6";
 
 
 interface Submission extends FieldValues {
@@ -38,8 +39,10 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
 
     const [photos, setPhotos] = useState<(File | string)[]>([]); // Assuming photos is an array of strings, update accordingly
     const [isSaving, setIsSaving] = useState(false);
-    const [isSaved, setIsSaved] = useState(true);
+    const [isSaved, setIsSaved] = useState(false);
     const [error, setError] = useState("");
+
+    const {setDisable} = props;
 
     const {
         register,
@@ -68,6 +71,8 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
             images
         };
 
+        setIsSaving(true);
+
         (async() => {
             const res = await fetch(process.env.LOCAL_URL + "/api/create_whitelist", {
                 method: "POST",
@@ -80,6 +85,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
             const dataReceived = await res.json() as {success?: boolean, message: string, id: string};
 
             if(!dataReceived.success){
+
                 setIsSaving(false);
                 setError(dataReceived.message);
             }
@@ -94,7 +100,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
         if (typeof ref === 'function') {
             ref(null); // Handle the callback ref function case
         } else if (ref && ref.current) {
-            //setDisable(false);
+            setDisable(false);
             ref.current.style.display = 'none';
         }
     }
@@ -104,7 +110,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
     }
 
     return(
-        <div ref={ref} style={{display: "flex"}} className="modal-wrapper">
+        <div ref={ref} className="modal-wrapper">
             <div className={styles['modal-container']}>
                 {!isSaved ?
                 <>
@@ -288,6 +294,9 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                                 <p role="alert">Describe Outfite is required</p>
                             )}
                         </div>
+                        {error !== "" && <div className={styles['input-row']}>
+                            <p>{error}</p>
+                        </div>}
                         <button className="default-button">{
                             isSaving ? 
                             <>
@@ -299,11 +308,14 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                 </>
                 :
                 <div className={styles['modal-saved']}>
-                    <IoMdCheckboxOutline />
+                <div className={styles['header']}>
+                    <FaRegCircleCheck />
                     <h1>Your whitelist request was sent! Wait while our admins review your application.</h1>
+                </div>
                     <Image width={500} height={500} src="/images/BazingaToilet.png" alt="Whitelist Submission" />
                 </div>
                 }
+            <button className={styles['close-button']} onClick={handleClose}><RxCross2 /></button>
             </div>
         </div>
     )

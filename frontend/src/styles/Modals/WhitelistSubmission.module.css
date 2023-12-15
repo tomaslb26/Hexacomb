@@ -156,12 +156,18 @@
     gap: 16px;
 }
 
-.modal-saved>h1{
+.header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.header>h1{
     font-size: 24px;
     font-weight: 600;
     font-family: "SpaceGrotesk-Variable";  
     color: white;
-    text-align: center;
 }
 
 .modal-saved>img{
@@ -169,8 +175,78 @@
     height: auto;
 }
 
-.modal-saved>svg{
+.header>svg{
     width: 60px;
     height: 60px;
     fill: var(--success-500);
+}
+
+.close-button{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: #2D2937;
+    border: 1px solid #f0ad2c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .modal-container{
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 0px;
+        padding: 16px;
+        padding-top: 48px;
+    }
+
+    .item-row{
+        flex-direction: column;
+    }
+
+    .item-row>button{
+        width: 100%;
+    }
+
+    .input-row>label, .input-row>label>h6{
+        width: 100%;
+    }
+
+    .item-input{
+        width: 100%;
+    }
+
+    .input-tabs{
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .input-tabs>button{
+        width: 100%;
+    }
+
+    .modal-body>button{
+        width: 100%;
+    }
+
+    .header{
+        flex-direction: column;
+    }
+
+    .header>h1{
+        font-size: 26px;
+        text-align: center;
+        line-height: 26px;
+    }
+
+    .modal-saved>img{
+        width: 100%;
+    }
 }
