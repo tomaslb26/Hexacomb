@@ -126,3 +126,51 @@
 
     cursor: pointer;
 }
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid;
+    border-color: rgb(255, 255, 247) transparent rgb(255, 255, 247) transparent;
+    border-radius: 50%;
+    animation: spin-anim 1.2s linear infinite;
+}
+  
+@keyframes spin-anim {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.modal-saved{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-saved>h1{
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "SpaceGrotesk-Variable";  
+    color: white;
+    text-align: center;
+}
+
+.modal-saved>img{
+    width: 60%;
+    height: auto;
+}
+
+.modal-saved>svg{
+    width: 60px;
+    height: 60px;
+    fill: var(--success-500);
+}
