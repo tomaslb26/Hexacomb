@@ -39,7 +39,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
 
     const [photos, setPhotos] = useState<(File | string)[]>([]); // Assuming photos is an array of strings, update accordingly
     const [isSaving, setIsSaving] = useState(false);
-    const [isSaved, setIsSaved] = useState(true);
+    const [isSaved, setIsSaved] = useState(false);
     const [error, setError] = useState("");
 
     const {setDisable} = props;
