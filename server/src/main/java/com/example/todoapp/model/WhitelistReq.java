@@ -53,6 +53,14 @@ public class WhitelistReq {
     @Enumerated
     private WhitelistStatus status;
 
+    public String getPhotosAsString(){
+        String photosAsString = "";
+        for (String photo : photos) {
+            photosAsString += photo + "\n";
+        }
+        return photosAsString;
+    }
+
     @Override
     public String toString(){
         return "Discord Name: " + "\n\n" + discordName + "\n\n" +
@@ -68,7 +76,7 @@ public class WhitelistReq {
                 "Story & \"Player to Player\" interaction is what pushes a SMP forward. In what ways do you think you can drive the lifespan of the server further based on the way you intend on contributing to the community?" + "\n\n" + waysToDriveLifespan + "\n\n" +
                 "In an economy-based server, how would you contribute to the in-game economy and trade with other players?" + "\n\n" + contributeToEconomy + "\n\n" +
                 "How do you go about handling conflict on a server? This includes drama outside the server or rule breaks by other players such as unsolicited PvP & Grief." + "\n\n" + howToHandleConflict + "\n\n" +
-                "Photos: " + "\n\n" + photos + "\n\n" +
+                "Photos: " + "\n\n" + getPhotosAsString() + "\n\n" +
                 "Have you ever been banned from any Minecraft Servers in the past? If so, why?" + "\n\n" + haveYouBeenBanned + "\n\n" +
                 "Imagine you're hosting a \"Minecraft Fashion Show\" on the server, and the theme is \"Mobs in Formal Wear.\" You have to dress up one of the hostile mobs in the most hilarious and stylish formal outfit you can think of. Describe the outfit in detail and explain why you think it would win the fashion show." + "\n\n" + describeOutfite + "\n\n";
     }
