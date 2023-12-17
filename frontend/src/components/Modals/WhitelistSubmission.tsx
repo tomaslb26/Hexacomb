@@ -39,7 +39,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
 
     const [photos, setPhotos] = useState<(File | string)[]>([]); // Assuming photos is an array of strings, update accordingly
     const [isSaving, setIsSaving] = useState(false);
-    const [isSaved, setIsSaved] = useState(false);
+    const [isSaved, setIsSaved] = useState(true);
     const [error, setError] = useState("");
 
     const {setDisable} = props;
@@ -312,7 +312,7 @@ const CreateSubmission = forwardRef<HTMLDivElement, {
                     <FaRegCircleCheck />
                     <h1>Your whitelist request was sent! Wait while our admins review your application.</h1>
                 </div>
-                    <Image width={500} height={500} src="/images/BazingaToilet.png" alt="Whitelist Submission" />
+                    <Image width={500} height={500} src="/images/BazingaThumbsUp.png" alt="Whitelist Submission" />
                 </div>
                 }
             <button className={styles['close-button']} onClick={handleClose}><RxCross2 /></button>
