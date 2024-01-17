@@ -54,6 +54,11 @@ public class WhitelistReq {
     private WhitelistStatus status;
 
     public String getPhotosAsString(){
+
+        if(photos == null || photos.isEmpty()){
+            return "No photos";
+        }
+
         String photosAsString = "";
         for (String photo : photos) {
             photosAsString += photo + "\n";
