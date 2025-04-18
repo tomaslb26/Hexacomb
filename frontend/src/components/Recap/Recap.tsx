@@ -114,6 +114,12 @@ export default function Recap(){
                     World Download <HiOutlineDocumentDownload />
                 </Link>
             </div>
+            <div className={styles['main-heading']}>
+                <h2>Season 4</h2>
+                <Link href={"https://drive.google.com/file/d/1O4SaNqeT8ap1vEXPaq0eDr1DLgUqqG2E/view?usp=drive_link"}>
+                    World Download <HiOutlineDocumentDownload />
+                </Link>
+            </div>
         </div>
     )
 }
